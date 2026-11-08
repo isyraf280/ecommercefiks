@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+  .form-section {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .form-section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .form-check-row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px 0;
+  }
+  .form-check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+  }
+  .form-check-item input { width: 18px; height: 18px; cursor: pointer; }
+  .errorlist {
+    list-style: none;
+    color: #b91c1c;
+    font-size: 0.82rem;
+    margin-top: 4px;
+  }
+  .foto-preview-wrap { margin-top: 10px; }
+  .foto-preview-wrap img {
+    max-width: 160px;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+  }
+  .foto-preview-wrap p { font-size: 0.8rem; color: #64748b; margin-top: 4px; }
+  .btn-back {
+    background: #f1f5f9;
+    color: #334155;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+  }
+  .btn-back:hover { background: #e2e8f0; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ heading }}</h1>
+    <p>{% if action == 'edit' %}Perbarui informasi produk yang sudah ada{% else %}Isi detail produk baru untuk katalog{% endif %}</p>
+  </div>
+  <a href="{% url 'app:admin_katalog' %}" class="btn-back">← Kembali ke Katalog</a>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <!-- Informasi Dasar -->
+  <div class="content-card">
+    <div class="form-section-title">📋 Informasi Dasar Produk</div>
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.nama_produk.label_tag }}
+        {{ form.nama_produk }}
+        {% if form.nama_produk.errors %}<ul class="errorlist">{% for e in form.nama_produk.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.kategori.label_tag }}
+        {{ form.kategori }}
+        {% if form.kategori.errors %}<ul class="errorlist">{% for e in form.kategori.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+    </div>
+    <div class="form-group">
+      {{ form.deskripsi.label_tag }}
+      {{ form.deskripsi }}
+    </div>
+    <div class="form-group">
+      {{ form.bahan.label_tag }}
+      {{ form.bahan }}
+    </div>
+  </div>
+
+  <!-- Harga & Stok -->
+  <div class="content-card">
+    <div class="form-section-title">💰 Harga, Stok &amp; Satuan</div>
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.harga.label_tag }}
+        <div style="position:relative;">
+          <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#64748b;font-size:0.88rem;">Rp</span>
+          <input type="number" name="harga" value="{{ form.harga.value|default:'' }}" class="form-control" placeholder="0" min="0" step="500" style="padding-left:36px;">
+        </div>
+        {% if form.harga.errors %}<ul class="errorlist">{% for e in form.harga.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.stok.label_tag }}
+        {{ form.stok }}
+        {% if form.stok.errors %}<ul class="errorlist">{% for e in form.stok.errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.satuan.label_tag }}
+        {{ form.satuan }}
+      </div>
+      <div class="form-group">
+        {{ form.berat_gram.label_tag }}
+        {{ form.berat_gram }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Foto & Status -->
+  <div class="content-card">
+    <div class="form-section-title">🖼️ Foto &amp; Status Produk</div>
+    <div class="form-row">
+      <div class="form-group">
+        {{ form.foto.label_tag }}
+        {{ form.foto }}
+        {% if produk and produk.foto %}
+        <div class="foto-preview-wrap">
+          <img src="{{ produk.foto.url }}" alt="Foto saat ini">
+          <p>Foto saat ini — unggah baru untuk mengganti</p>
+        </div>
+        {% endif %}
+      </div>
+      <div>
+        <div class="form-section-title" style="border:none;padding:0;margin-bottom:10px;">Visibilitas</div>
+        <div class="form-check-row">
+          <label class="form-check-item">
+            {{ form.tersedia }} <span>{{ form.tersedia.label }}</span>
+          </label>
+          <label class="form-check-item">
+            {{ form.unggulan }} <span>{{ form.unggulan.label }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;margin-top:4px;">
+    <button type="submit" class="btn-primary">
+      {% if action == 'edit' %}💾 Simpan Perubahan{% else %}✅ Tambah Produk{% endif %}
+    </button>
+    <a href="{% url 'app:admin_katalog' %}" class="btn-back">Batal</a>
+  </div>
+</form>
+{% endblock %}
+

@@ -1,0 +1,364 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|default:"Toko Roti & Bakery Lesaffrone" }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+
+    <!-- ── NAVBAR ──────────────────────────────────────── -->
+    <nav class="pub-nav">
+        <a href="{% url 'home' %}" class="pub-nav-brand">
+            <div class="pub-nav-logo">🍞</div>
+            <div>
+                <span style="display:block; line-height:1.1;">Lesaffrone</span>
+                <span style="font-size:0.68rem; font-weight:600; color:var(--primary); letter-spacing:0.04em; text-transform:uppercase;">Fresh From Oven</span>
+            </div>
+        </a>
+
+        <div class="pub-nav-links">
+            <a href="{% url 'home' %}#beranda">Beranda</a>
+            <a href="{% url 'home' %}#unggulan">Unggulan</a>
+            <a href="{% url 'katalog' %}" style="color:var(--primary); font-weight:800;">🛒 Katalog Roti</a>
+            <a href="{% url 'home' %}#keunggulan">Tentang Kami</a>
+            <a href="{% url 'home' %}#kontak">Kontak</a>
+        </div>
+
+        <div class="pub-nav-actions">
+            <a href="{% url 'lihat_keranjang' %}" class="btn-pub-outline" style="position:relative; display:inline-flex; align-items:center; gap:6px; font-weight:700;">
+                <span>🛒 Keranjang</span>
+                {% if cart_total_qty and cart_total_qty > 0 %}
+                <span style="background:var(--primary); color:#fff; font-size:0.72rem; padding:2px 7px; border-radius:999px; font-weight:800;">{{ cart_total_qty }}</span>
+                {% endif %}
+            </a>
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'riwayat_pesanan' %}" class="btn-pub-outline" style="font-size:0.84rem;">📦 Pesanan</a>
+                {% if request.user.is_superuser or request.user.last_name == 'Super Admin' %}
+                    <a href="{% url 'app:admin_pesanan' %}" class="btn-pub-outline" style="background:#eff6ff; color:#1d4ed8; font-weight:700; border-color:#93c5fd;">📦 Kelola Pesanan</a>
+                    <a href="{% url 'app:dashboard' %}" class="btn-pub-solid">
+                        <span>⚙️ Panel Admin</span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'app:dashboard' %}" class="btn-nav-user">
+                        <span>👤 {{ request.user.first_name|default:request.user.username }}</span>
+                    </a>
+                {% endif %}
+                <a href="{% url 'logout' %}" class="btn-pub-outline" style="padding: 8px 14px;">Keluar</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-pub-outline">Masuk</a>
+                <a href="{% url 'register' %}" class="btn-pub-solid">Daftar</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- ── HERO SECTION ────────────────────────────────── -->
+    <header class="hero" id="beranda">
+        <div class="hero-inner">
+            <div>
+                <div class="hero-tag">
+                    <span>✨ Dipanggang Setiap Pagi Jam 05.00</span>
+                </div>
+                <h1>
+                    Kehangatan Roti Segar <span>Langsung dari Oven</span> Lesaffrone
+                </h1>
+                <p class="hero-desc">
+                    Nikmati sensasi kelembutan roti manis, croissant renyah bermentega Prancis, dan bolu legendaris yang dibuat dari resep istimewa sejak 2010.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#katalog" class="btn-hero-primary">
+                        <span>🛒 Jelajahi Katalog Roti</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    {% if not request.user.is_authenticated %}
+                    <a href="{% url 'register' %}" class="btn-hero-secondary">
+                        <span>Daftar Akun Pelanggan</span>
+                    </a>
+                    {% endif %}
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <strong>100%</strong>
+                        <span>Bahan Alami & Halal</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>{{ total_produk|default:"12+" }}</strong>
+                        <span>Varian Roti & Pastry</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>{{ total_kategori|default:"5" }}</strong>
+                        <span>Kategori Spesial</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>0%</strong>
+                        <span>Bahan Pengawet Kimia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Art Visual -->
+            <div class="hero-art">
+                <div class="hero-art-main">
+                    🥐
+                </div>
+                <div class="hero-art-bubble b1">
+                    <span>🍞</span>
+                    <div>
+                        <div style="font-size:0.75rem; color:#64748b;">Favorit Pelanggan</div>
+                        <div>Roti Sobek Cokelat</div>
+                    </div>
+                </div>
+                <div class="hero-art-bubble b2">
+                    <span>⭐ 4.9 / 5.0</span>
+                    <div style="font-size:0.72rem; color:#64748b;">(1.200+ Ulasan)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── SEARCH BAR PUBLIK ───────────────────────────── -->
+    <section style="padding: 30px 20px 0; max-width: 800px; margin: 0 auto;">
+        <form class="search-pub-wrap" method="get" action="#katalog">
+            {% if kategori_slug %}<input type="hidden" name="kategori" value="{{ kategori_slug }}">{% endif %}
+            <input type="text" name="q" value="{{ q }}" placeholder="Cari roti, croissant, cake, abon...">
+            <button type="submit" class="btn-search">Cari Roti</button>
+            {% if q %}
+                <a href="{% url 'home' %}#katalog" class="btn-pub-outline" style="display:flex;align-items:center;">Reset</a>
+            {% endif %}
+        </form>
+    </section>
+
+    <!-- ── PRODUK UNGGULAN ─────────────────────────────── -->
+    {% if produk_unggulan and not q and not kategori_slug %}
+    <section class="section section-alt" id="unggulan">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">⭐ Rekomendasi Hari Ini</span>
+                <h2 class="section-title">Menu Favorit Pilihan Pelanggan</h2>
+                <p class="section-desc">Pilihan roti dan pastry paling banyak dipesan setiap harinya</p>
+            </div>
+
+            <div class="unggulan-scroll">
+                {% for p in produk_unggulan %}
+                <div class="unggulan-card">
+                    <div class="unggulan-img">
+                        {% if p.foto %}
+                            <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}" style="width:100%; height:100%; object-fit:cover;">
+                        {% else %}
+                            <span>🍞</span>
+                        {% endif %}
+                        <span class="badge-unggulan-pub">Unggulan</span>
+                    </div>
+                    <div class="unggulan-body">
+                        <div class="produk-pub-kat">{{ p.kategori.nama|default:"Bakery" }}</div>
+                        <h3 class="unggulan-nama">{{ p.nama_produk }}</h3>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                            <div>
+                                <span class="unggulan-harga">Rp {{ p.harga|floatformat:0 }}</span>
+                                <span class="unggulan-satuan">/ {{ p.satuan }}</span>
+                            </div>
+                            <div style="display:flex; gap:6px;">
+                                <a href="{% url 'app:detail_produk' p.slug %}" class="btn-detail">Lihat</a>
+                                <a href="{% url 'beli_sekarang' p.slug %}" class="btn-detail" style="background:#ea580c; color:#fff; border-color:#ea580c;" title="Beli Sekarang">+ 🛒</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- ── KATALOG LENGKAP ─────────────────────────────── -->
+    <section class="section" id="katalog">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">🌾 Etalase Lengkap</span>
+                <h2 class="section-title">Katalog Roti &amp; Bakery</h2>
+                <p class="section-desc">Pilih kategori favorit Anda atau jelajahi semua pilihan roti segar kami</p>
+            </div>
+
+            <!-- Kategori Chips Filter -->
+            <div class="kategori-grid" style="margin-bottom: 36px;">
+                <a href="{% url 'home' %}#katalog" class="kat-chip {% if not kategori_slug %}active{% endif %}">
+                    <span class="kat-chip-icon">🍞</span>
+                    <span>Semua Roti</span>
+                </a>
+                {% for kat in kategori_all %}
+                <a href="{% url 'home' %}?kategori={{ kat.slug }}#katalog" class="kat-chip {% if kategori_slug == kat.slug %}active{% endif %}">
+                    <span class="kat-chip-icon">
+                        {% if 'Manis' in kat.nama %}🥐
+                        {% elif 'Tawar' in kat.nama %}🍞
+                        {% elif 'Pastry' in kat.nama %}🥨
+                        {% elif 'Cake' in kat.nama %}🍰
+                        {% elif 'Gurih' in kat.nama or 'Daging' in kat.nama %}🥖
+                        {% else %}🧁{% endif %}
+                    </span>
+                    <span>{{ kat.nama }}</span>
+                    <span class="kat-chip-count">{{ kat.produk.count }}</span>
+                </a>
+                {% endfor %}
+            </div>
+
+            <!-- Produk Grid -->
+            {% if produk_list %}
+            <div class="produk-pub-grid">
+                {% for p in produk_list %}
+                <div class="produk-pub-card">
+                    <div style="position:relative;">
+                        {% if p.foto %}
+                            <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}" class="produk-pub-img">
+                        {% else %}
+                            <div class="produk-pub-img-ph">
+                                {% if 'Pastry' in p.kategori.nama or 'Croissant' in p.nama_produk %}🥐
+                                {% elif 'Cake' in p.kategori.nama or 'Bolu' in p.nama_produk %}🍰
+                                {% elif 'Tawar' in p.nama_produk %}🍞
+                                {% elif 'Abon' in p.nama_produk or 'Sosis' in p.nama_produk %}🥖
+                                {% else %}🍞{% endif %}
+                            </div>
+                        {% endif %}
+
+                        {% if p.unggulan %}
+                            <span class="badge-unggulan-pub">⭐ Unggulan</span>
+                        {% endif %}
+
+                        {% if p.stok == 0 %}
+                            <span class="badge-habis-pub">Habis</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="produk-pub-body">
+                        <div class="produk-pub-kat">{{ p.kategori.nama|default:"Bakery" }}</div>
+                        <h3 class="produk-pub-nama">{{ p.nama_produk }}</h3>
+                        <p class="produk-pub-desc">{{ p.deskripsi|default:"Roti segar berkualitas tinggi dari resep istimewa." }}</p>
+
+                        <div class="produk-pub-footer">
+                            <div>
+                                <div class="produk-pub-harga">Rp {{ p.harga|floatformat:0 }}</div>
+                                <div class="produk-pub-satuan">per {{ p.satuan }}{% if p.berat_gram %} · {{ p.berat_gram }}g{% endif %}</div>
+                            </div>
+                            <div style="display:flex; gap:6px;">
+                                <a href="{% url 'app:detail_produk' p.slug %}" class="btn-detail">Detail Roti</a>
+                                <a href="{% url 'beli_sekarang' p.slug %}" class="btn-detail" style="background:#ea580c; color:#fff; border-color:#ea580c; font-weight:700;" title="Beli Langsung">+ 🛒</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-pub">
+                <div class="empty-pub-icon">🥖</div>
+                <h3>Tidak ada produk yang ditemukan</h3>
+                <p>Coba gunakan kata kunci pencarian yang lain atau pilih kategori lain.</p>
+                <a href="{% url 'home' %}#katalog" class="btn-pub-outline" style="margin-top:16px; display:inline-block;">Lihat Semua Produk</a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- ── KEUNGGULAN / WHY US ──────────────────────────── -->
+    <section class="section section-alt" id="keunggulan">
+        <div class="section-inner">
+            <div class="section-header">
+                <span class="section-tag">🌟 Jaminan Kualitas</span>
+                <h2 class="section-title">Kenapa Harus Bakery Lesaffrone?</h2>
+                <p class="section-desc">Komitmen kami menyajikan roti berkualitas terbaik untuk keluarga Anda</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🧈</div>
+                    <h3 class="why-title">100% Butter &amp; Bahan Pilihan</h3>
+                    <p class="why-desc">Kami menggunakan mentega murni berkualitas tinggi dan tepung gandum bermutu prima tanpa pemutih sintetis.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🌿</div>
+                    <h3 class="why-title">Tanpa Pengawet Buatan</h3>
+                    <p class="why-desc">Roti dipanggang alami tanpa penambahan zat pengawet kimia berbahaya. Aman untuk konsumsi anak-anak dan lansia.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🔥</div>
+                    <h3 class="why-title">Fresh From The Oven</h3>
+                    <p class="why-desc">Proses pemanggangan dilakukan setiap pagi agar setiap roti yang sampai ke tangan Anda tetap harum, hangat, dan empuk.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">📜</div>
+                    <h3 class="why-title">Resep Otentik Sejak 2010</h3>
+                    <p class="why-desc">Kombinasi teknik pembuatan artisan tradisional dengan cita rasa khas Nusantara yang tak pernah lekang oleh waktu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CTA BANNER ──────────────────────────────────── -->
+    <section class="cta-banner">
+        <h2>Ingin Menikmati Kelezatan Roti Hangat Hari Ini?</h2>
+        <p>Kunjungi etalase kami atau masuk ke akun Anda untuk menikmati kemudahan pemesanan.</p>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'app:katalog_pengguna' %}" class="btn-cta-white">
+                <span>🛒 Buka Dashboard Belanja</span>
+            </a>
+        {% else %}
+            <a href="{% url 'register' %}" class="btn-cta-white">
+                <span>Daftar Sekarang &amp; Mulai Belanja</span>
+            </a>
+        {% endif %}
+    </section>
+
+    <!-- ── FOOTER ──────────────────────────────────────── -->
+    <footer class="pub-footer" id="kontak">
+        <div class="pub-footer-inner">
+            <div class="pub-footer-top">
+                <div>
+                    <div class="pub-footer-brand">
+                        <span>🍞</span>
+                        <span>Lesaffrone</span>
+                    </div>
+                    <p class="pub-footer-desc">
+                        Toko roti dan bakery keluarga terpercaya yang mengedepankan kualitas rasa, kelembutan tekstur, dan kebersihan proses pembuatan dengan bahan alami terbaik.
+                    </p>
+                </div>
+                <div class="pub-footer-col">
+                    <h4>Navigasi</h4>
+                    <ul>
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#unggulan">Menu Unggulan</a></li>
+                        <li><a href="#katalog">Katalog Lengkap</a></li>
+                        <li><a href="#keunggulan">Tentang Kami</a></li>
+                        <li><a href="{% url 'login' %}">Portal Masuk</a></li>
+                    </ul>
+                </div>
+                <div class="pub-footer-col">
+                    <h4>Informasi Toko</h4>
+                    <ul>
+                        <li>📍 Jl. Roti Harum No. 45, Kota Anda</li>
+                        <li>⏰ Buka Setiap Hari: 06.00 - 21.00 WIB</li>
+                        <li>📞 Telp/WA: +62 812-3456-7890</li>
+                        <li>✉️ email: halo@lesaffrone.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pub-footer-bottom">
+                <div>&copy; 2026 E-Commerce Toko Roti &amp; Bakery Lesaffrone. All rights reserved.</div>
+                <div>Terintegrasi dengan Django &amp; Database MySQL / MariaDB</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+  .detail-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (max-width: 680px) {
+    .detail-wrap { grid-template-columns: 1fr; }
+  }
+
+  .produk-foto-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .produk-foto-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .produk-foto-placeholder { font-size: 6rem; }
+
+  .produk-info {}
+  .produk-kat-badge {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-decoration: none;
+  }
+  .produk-nama {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .produk-harga {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #059669;
+    margin-bottom: 4px;
+  }
+  .produk-satuan {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .info-chip {
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    color: #334155;
+    font-weight: 600;
+  }
+  .info-chip span { color: #64748b; font-weight: 400; display: block; font-size: 0.75rem; margin-bottom: 1px; }
+
+  .stok-badge {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .stok-available { background: #dcfce7; color: #15803d; }
+  .stok-low { background: #fef9c3; color: #854d0e; }
+  .stok-empty { background: #fee2e2; color: #991b1b; }
+
+  .detail-section-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #334155;
+    margin: 20px 0 8px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+  }
+  .detail-section-title:first-of-type { border-top: none; padding-top: 0; }
+
+  .deskripsi-text {
+    color: #475569;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  /* Related */
+  .related-section { margin-top: 40px; }
+  .related-section h2 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 16px;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 16px;
+  }
+  .related-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.2s;
+  }
+  .related-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
+  .related-card-img { width:100%; height:120px; object-fit:cover; background:#f1f5f9; }
+  .related-card-ph { width:100%; height:120px; background:linear-gradient(135deg,#fef3c7,#fde68a); display:flex;align-items:center;justify-content:center;font-size:2.5rem; }
+  .related-card-body { padding: 10px 12px; }
+  .related-card-nama { font-size: 0.88rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .related-card-harga { font-size: 0.88rem; font-weight: 800; color: #059669; }
+
+  .btn-back-katalog {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    background: #f1f5f9;
+    color: #334155;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: 0.2s;
+    margin-bottom: 20px;
+  }
+  .btn-back-katalog:hover { background: #e2e8f0; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
+  <a href="{% url 'home' %}#katalog" class="btn-back-katalog">← Kembali ke Beranda Toko</a>
+  <a href="{% url 'app:katalog_pengguna' %}" class="btn-back-katalog">🛒 Katalog Lengkap</a>
+</div>
+
+<div class="content-card">
+  <div class="detail-wrap">
+    <!-- Foto -->
+    <div class="produk-foto-wrap">
+      {% if produk.foto %}
+        <img src="{{ produk.foto.url }}" alt="{{ produk.nama_produk }}">
+      {% else %}
+        <div class="produk-foto-placeholder">🍞</div>
+      {% endif %}
+    </div>
+
+    <!-- Info -->
+    <div class="produk-info">
+      {% if produk.kategori %}
+      <a href="{% url 'app:katalog_pengguna' %}?kategori={{ produk.kategori.slug }}" class="produk-kat-badge">{{ produk.kategori.nama }}</a>
+      {% endif %}
+      {% if produk.unggulan %}
+      <span style="display:inline-block;background:#fef9c3;color:#854d0e;padding:4px 10px;border-radius:999px;font-size:0.78rem;font-weight:700;margin-left:6px;margin-bottom:10px;">⭐ Produk Unggulan</span>
+      {% endif %}
+
+      <div class="produk-nama">{{ produk.nama_produk }}</div>
+      <div class="produk-harga">Rp {{ produk.harga|floatformat:0 }}</div>
+      <div class="produk-satuan">per {{ produk.satuan }}{% if produk.berat_gram %} · {{ produk.berat_gram }} gram{% endif %}</div>
+
+      <!-- Stok -->
+      {% if produk.stok == 0 %}
+        <span class="stok-badge stok-empty">❌ Stok Habis</span>
+      {% elif produk.stok <= 5 %}
+        <span class="stok-badge stok-low">⚠️ Stok Terbatas: {{ produk.stok }} {{ produk.satuan }}</span>
+      {% else %}
+        <span class="stok-badge stok-available">✅ Tersedia: {{ produk.stok }} {{ produk.satuan }}</span>
+      {% endif %}
+
+      <!-- Tombol Aksi Belanja / Pembayaran -->
+      {% if produk.stok > 0 %}
+      <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:14px; padding:18px 20px; margin-bottom:20px;">
+        <form method="POST" action="{% url 'tambah_keranjang' produk.slug %}" id="form-beli" style="display:flex; flex-direction:column; gap:12px;">
+          {% csrf_token %}
+          <div style="display:flex; align-items:center; gap:12px;">
+            <label for="jumlah-input" style="font-weight:700; font-size:0.88rem; color:#431407;">Jumlah Pesan:</label>
+            <div style="display:inline-flex; align-items:center; border:1px solid #fdba74; border-radius:8px; background:#fff; overflow:hidden;">
+              <button type="button" onclick="let input=document.getElementById('jumlah-input'); if(parseInt(input.value)>1) input.value=parseInt(input.value)-1;" style="border:none; background:#ffedd5; width:34px; height:34px; font-weight:800; color:#c2410c; cursor:pointer;">-</button>
+              <input type="number" id="jumlah-input" name="jumlah" value="1" min="1" max="{{ produk.stok }}" style="width:50px; text-align:center; border:none; font-weight:800; font-size:0.95rem; color:#0f172a;" />
+              <button type="button" onclick="let input=document.getElementById('jumlah-input'); if(parseInt(input.value)<{{ produk.stok }}) input.value=parseInt(input.value)+1;" style="border:none; background:#ffedd5; width:34px; height:34px; font-weight:800; color:#c2410c; cursor:pointer;">+</button>
+            </div>
+            <span style="font-size:0.82rem; color:#9a3412;">{{ produk.satuan }}</span>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
+            <button type="submit" class="btn-primary" style="background:#ea580c; border:none; padding:10px 18px; font-weight:700; font-size:0.9rem; border-radius:8px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+              🛒 Tambah ke Keranjang
+            </button>
+            <a href="{% url 'beli_sekarang' produk.slug %}" class="btn-primary" style="background:#15803d; border:none; padding:10px 18px; font-weight:700; font-size:0.9rem; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+              ⚡ Beli Sekarang
+            </a>
+          </div>
+        </form>
+      </div>
+      {% else %}
+      <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:14px 18px; color:#991b1b; font-size:0.9rem; font-weight:600; margin-bottom:20px;">
+        ❌ Maaf, stok roti ini sedang habis dipesan. Silakan pilih varian roti lezat lainnya.
+      </div>
+      {% endif %}
+
+      <div class="info-row">
+        <div class="info-chip">
+          <span>Kategori</span>{{ produk.kategori.nama|default:"—" }}
+        </div>
+        <div class="info-chip">
+          <span>Satuan</span>{{ produk.satuan }}
+        </div>
+        {% if produk.berat_gram %}
+        <div class="info-chip">
+          <span>Berat</span>{{ produk.berat_gram }} gram
+        </div>
+        {% endif %}
+        <div class="info-chip">
+          <span>Stok</span>{{ produk.stok }} {{ produk.satuan }}
+        </div>
+      </div>
+
+      {% if produk.deskripsi %}
+      <div class="detail-section-title">📋 Deskripsi Produk</div>
+      <p class="deskripsi-text">{{ produk.deskripsi }}</p>
+      {% endif %}
+
+      {% if produk.bahan %}
+      <div class="detail-section-title">🌾 Bahan / Komposisi</div>
+      <p class="deskripsi-text">{{ produk.bahan }}</p>
+      {% endif %}
+
+      <div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;font-size:0.8rem;color:#94a3b8;">
+        Terakhir diperbarui: {{ produk.diperbarui|date:"d M Y, H:i" }} WIB
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Produk Terkait -->
+{% if produk_terkait %}
+<div class="related-section">
+  <h2>🧁 Produk Lainnya dari Kategori Ini</h2>
+  <div class="related-grid">
+    {% for p in produk_terkait %}
+    <a href="{% url 'app:detail_produk' p.slug %}" class="related-card">
+      {% if p.foto %}
+        <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}" class="related-card-img">
+      {% else %}
+        <div class="related-card-ph">🍞</div>
+      {% endif %}
+      <div class="related-card-body">
+        <div class="related-card-nama">{{ p.nama_produk }}</div>
+        <div class="related-card-harga">Rp {{ p.harga|floatformat:0 }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,391 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+  .sandbox-container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .sandbox-card {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 20px 35px -5px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .sandbox-topbar {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #ffffff;
+    padding: 20px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .sandbox-badge-mode {
+    background: #f59e0b;
+    color: #78350f;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .sandbox-amount {
+    font-size: 1.55rem;
+    font-weight: 900;
+    color: #38bdf8;
+  }
+
+  .sandbox-body {
+    padding: 28px;
+  }
+
+  /* QRIS Box */
+  .qris-box {
+    text-align: center;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 18px 0;
+  }
+  .qris-qr-frame {
+    display: inline-block;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+  }
+  .qris-qr-svg {
+    width: 190px;
+    height: 190px;
+  }
+
+  /* VA Box */
+  .va-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 18px 0;
+  }
+  .va-number-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 2px solid #fed7aa;
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin: 10px 0;
+  }
+  .va-number-text {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #c2410c;
+    font-family: monospace;
+  }
+  .btn-copy-va {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .btn-copy-va:hover { background: #fed7aa; }
+
+  /* Credit Card Mock */
+  .cc-mock-card {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(15,23,42,0.2);
+  }
+  .cc-chip {
+    width: 42px;
+    height: 32px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-radius: 6px;
+    margin-bottom: 18px;
+  }
+
+  /* Sandbox Control Panel (Testing Buttons) */
+  .testing-panel {
+    background: #fffbeb;
+    border: 2px solid #fde68a;
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 28px;
+  }
+  .testing-panel-title {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #92400e;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-sim-success {
+    background: #16a34a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(22,163,74,0.3);
+    transition: 0.2s;
+  }
+  .btn-sim-success:hover { background: #15803d; transform: translateY(-1px); }
+
+  .btn-sim-deny {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    border: 1px solid #fecaca;
+    transition: 0.2s;
+  }
+  .btn-sim-deny:hover { background: #fecaca; }
+
+  .btn-sim-expire {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-decoration: none;
+    border: 1px solid #cbd5e1;
+    transition: 0.2s;
+  }
+  .btn-sim-expire:hover { background: #e2e8f0; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sandbox-container">
+  <!-- Top Notification -->
+  <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="{% url 'katalog' %}" style="font-size: 0.88rem; font-weight: 700; color: #64748b; text-decoration: none;">
+      ← Batalkan &amp; Kembali ke Toko
+    </a>
+    <span class="sandbox-badge-mode">🧪 Environment: Sandbox Mode</span>
+  </div>
+
+  <div class="sandbox-card">
+    <!-- Topbar Gateway -->
+    <div class="sandbox-topbar">
+      <div>
+        <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Lesaffrone Payment Gateway</div>
+        <div style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">Invoice: {{ pesanan.nomor_pesanan }}</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 0.75rem; color: #94a3b8;">Total Tagihan</div>
+        <div class="sandbox-amount">Rp {{ pesanan.grand_total|floatformat:0 }}</div>
+      </div>
+    </div>
+
+    <!-- Body Channel Pembayaran -->
+    <div class="sandbox-body">
+      <!-- Info Ringkas Pesanan -->
+      <div style="display: flex; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid #f1f5f9; font-size: 0.88rem; color: #475569;">
+        <div>Penerima: <strong>{{ pesanan.nama_pelanggan }}</strong> ({{ pesanan.telepon }})</div>
+        <div>Metode: <strong>{{ pesanan.get_metode_pembayaran_display }}</strong></div>
+      </div>
+
+      <!-- 1. CHANNEL QRIS -->
+      {% if pesanan.metode_pembayaran == 'qris' or pesanan.metode_pembayaran == 'gopay' %}
+      <div class="qris-box">
+        <div style="font-size: 0.82rem; font-weight: 800; color: #1e293b; margin-bottom: 4px;">
+          QRIS - Quick Response Code Indonesian Standard
+        </div>
+        <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 14px;">
+          Buka aplikasi e-wallet (GoPay, OVO, ShopeePay, Dana, LinkAja) atau Mobile Banking BCA/Mandiri/BRI Anda lalu scan QR code ini:
+        </p>
+
+        <div class="qris-qr-frame">
+          <!-- Dynamic SVG QR Code Simulation -->
+          <svg class="qris-qr-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background putih -->
+            <rect width="100" height="100" fill="#ffffff"/>
+            <!-- 3 Finder Patterns -->
+            <rect x="5" y="5" width="28" height="28" fill="#0f172a" rx="4"/>
+            <rect x="9" y="9" width="20" height="20" fill="#ffffff" rx="2"/>
+            <rect x="13" y="13" width="12" height="12" fill="#0f172a" rx="1"/>
+
+            <rect x="67" y="5" width="28" height="28" fill="#0f172a" rx="4"/>
+            <rect x="71" y="9" width="20" height="20" fill="#ffffff" rx="2"/>
+            <rect x="75" y="13" width="12" height="12" fill="#0f172a" rx="1"/>
+
+            <rect x="5" y="67" width="28" height="28" fill="#0f172a" rx="4"/>
+            <rect x="9" y="71" width="20" height="20" fill="#ffffff" rx="2"/>
+            <rect x="13" y="75" width="12" height="12" fill="#0f172a" rx="1"/>
+
+            <!-- QR Data Blocks -->
+            <rect x="38" y="10" width="8" height="8" fill="#0f172a"/>
+            <rect x="52" y="10" width="6" height="6" fill="#0f172a"/>
+            <rect x="38" y="24" width="6" height="6" fill="#0f172a"/>
+            <rect x="50" y="22" width="10" height="8" fill="#0f172a"/>
+
+            <rect x="10" y="38" width="6" height="10" fill="#0f172a"/>
+            <rect x="22" y="44" width="8" height="6" fill="#0f172a"/>
+            <rect x="38" y="38" width="8" height="8" fill="#c2410c"/>
+            <rect x="52" y="38" width="8" height="8" fill="#0f172a"/>
+            <rect x="66" y="38" width="10" height="6" fill="#0f172a"/>
+            <rect x="82" y="42" width="8" height="8" fill="#0f172a"/>
+
+            <rect x="38" y="52" width="10" height="6" fill="#0f172a"/>
+            <rect x="54" y="52" width="6" height="10" fill="#c2410c"/>
+            <rect x="68" y="52" width="8" height="8" fill="#0f172a"/>
+            <rect x="82" y="54" width="6" height="8" fill="#0f172a"/>
+
+            <rect x="38" y="68" width="8" height="8" fill="#0f172a"/>
+            <rect x="52" y="66" width="6" height="8" fill="#0f172a"/>
+            <rect x="68" y="68" width="10" height="6" fill="#0f172a"/>
+            <rect x="44" y="80" width="8" height="8" fill="#0f172a"/>
+            <rect x="60" y="82" width="8" height="6" fill="#0f172a"/>
+            <rect x="76" y="80" width="12" height="8" fill="#0f172a"/>
+
+            <!-- Center Badge -->
+            <circle cx="50" cy="50" r="7" fill="#c2410c"/>
+            <text x="50" y="53" font-size="7" fill="#ffffff" font-weight="bold" text-anchor="middle">🍞</text>
+          </svg>
+
+          <div style="font-size: 0.72rem; color: #64748b; margin-top: 8px;">
+            NMID: <strong>ID1020261108001</strong> • LESAFFRONE BAKERY
+          </div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 0.78rem; color: #64748b;">
+          ⏱️ Selesaikan pembayaran dalam: <strong id="countdown" style="color: #c2410c;">23:59:45</strong>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- 2. CHANNEL VIRTUAL ACCOUNT -->
+      {% if 'va_' in pesanan.metode_pembayaran %}
+      <div class="va-box">
+        <div style="font-size: 0.85rem; font-weight: 700; color: #334155;">
+          Nomor Virtual Account {{ gateway.bank }}:
+        </div>
+
+        <div class="va-number-row">
+          <span class="va-number-text" id="vaText">{{ gateway.va_number|default:"8801234567890123" }}</span>
+          <button type="button" class="btn-copy-va" onclick="copyVA()">📋 Salin</button>
+        </div>
+
+        <div style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-top: 10px;">
+          <strong>Petunjuk Pembayaran Sandbox {{ gateway.bank }}:</strong>
+          <ol style="margin-left: 20px; margin-top: 6px;">
+            <li>Buka Mobile Banking {{ gateway.bank }} atau ATM terdekat.</li>
+            <li>Pilih menu <strong>Transfer &rarr; Virtual Account</strong>.</li>
+            <li>Masukkan nomor VA di atas dan konfirmasi nama tagihan <strong>Lesaffrone Bakery</strong>.</li>
+            <li>Pada mode sandbox ini, Anda dapat langsung menekan tombol simulasi di bawah untuk verifikasi instan.</li>
+          </ol>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- 3. CHANNEL KARTU KREDIT / DEBIT -->
+      {% if pesanan.metode_pembayaran == 'kartu_kredit' %}
+      <div>
+        <div class="cc-mock-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:0.8rem; letter-spacing:0.1em;">SANDBOX TEST CARD</span>
+            <span style="font-size:1.1rem; font-weight:800;">VISA</span>
+          </div>
+          <div class="cc-chip"></div>
+          <div style="font-size: 1.25rem; font-family: monospace; letter-spacing: 0.15em; margin-bottom: 12px;">
+            4111 2222 3333 4444
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.78rem;">
+            <span>HOLDER: {{ pesanan.nama_pelanggan|upper }}</span>
+            <span>EXPIRES: 12/28</span>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nomor Kartu Test Sandbox</label>
+            <input type="text" class="form-control" value="4111 2222 3333 4444" readonly>
+          </div>
+          <div class="form-group">
+            <label>Masa Berlaku &amp; CVV</label>
+            <input type="text" class="form-control" value="12/28 - CVV: 123" readonly>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- ── TESTING SANDBOX SIMULATOR CONTROLS ── -->
+      <div class="testing-panel">
+        <div class="testing-panel-title">
+          <span>🧪</span> PANEL PENGUJIAN GATEWAY (SIMULATOR ACTIONS)
+        </div>
+        <p style="font-size: 0.8rem; color: #92400e; margin-bottom: 16px;">
+          Sebagai developer/tester, Anda dapat menguji respons sistem secara langsung dengan menekan salah satu tombol simulasi berikut:
+        </p>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+          <a href="{% url 'payment_simulate_action' pesanan.id 'success' %}" class="btn-sim-success" onclick="return confirm('Simulasikan pembayaran BERHASIL? Pesanan akan diubah menjadi Lunas.');">
+            ✅ Simulasikan Bayar Berhasil (Settlement)
+          </a>
+
+          <a href="{% url 'payment_simulate_action' pesanan.id 'deny' %}" class="btn-sim-deny" onclick="return confirm('Simulasikan pembayaran DITOLAK / GAGAL?');">
+            ❌ Simulasikan Gagal (Deny)
+          </a>
+
+          <a href="{% url 'payment_simulate_action' pesanan.id 'expire' %}" class="btn-sim-expire" onclick="return confirm('Simulasikan pembayaran KADALUARSA?');">
+            ⏳ Simulasikan Expired
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function copyVA() {
+    const text = document.getElementById('vaText').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Nomor Virtual Account berhasil disalin: ' + text);
+    });
+  }
+
+  // Simple countdown timer
+  let totalSeconds = 24 * 3600 - 15;
+  const timerElem = document.getElementById('countdown');
+  if (timerElem) {
+    setInterval(() => {
+      totalSeconds--;
+      if (totalSeconds <= 0) totalSeconds = 0;
+      const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const s = String(totalSeconds % 60).padStart(2, '0');
+      timerElem.innerText = `${h}:${m}:${s}`;
+    }, 1000);
+  }
+</script>
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ heading }}</h1>
+    <p>Konfirmasi penghapusan produk dari database</p>
+  </div>
+  <a href="{% url 'app:admin_katalog' %}" style="background:#f1f5f9;color:#334155;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.92rem;text-decoration:none;">← Kembali</a>
+</div>
+
+<div class="content-card" style="max-width: 540px;">
+  <div style="text-align:center;padding:16px 0;">
+    <div style="font-size:3rem;margin-bottom:12px;">⚠️</div>
+    <h2 style="color:#991b1b;margin-bottom:8px;">Hapus Produk?</h2>
+    <p style="color:#475569;margin-bottom:4px;">Anda akan menghapus produk:</p>
+    <p style="font-size:1.1rem;font-weight:700;color:#0f172a;margin-bottom:16px;">{{ produk.nama_produk }}</p>
+    {% if produk.foto %}
+    <div style="margin-bottom:16px;">
+      <img src="{{ produk.foto.url }}" alt="{{ produk.nama_produk }}" style="width:120px;height:120px;object-fit:cover;border-radius:12px;border:2px solid #e2e8f0;">
+    </div>
+    {% endif %}
+    <p style="color:#64748b;font-size:0.88rem;">Tindakan ini tidak dapat dibatalkan. Foto produk juga akan dihapus dari server.</p>
+  </div>
+  <form method="post" style="display:flex;gap:12px;justify-content:center;margin-top:12px;">
+    {% csrf_token %}
+    <button type="submit" style="background:#dc2626;color:white;padding:10px 24px;border:none;border-radius:8px;font-weight:700;font-size:0.95rem;cursor:pointer;">Ya, Hapus Sekarang</button>
+    <a href="{% url 'app:admin_katalog' %}" style="background:#e2e8f0;color:#334155;padding:10px 24px;border-radius:8px;font-weight:600;font-size:0.95rem;text-decoration:none;">Batal</a>
+  </form>
+</div>
+{% endblock %}
+

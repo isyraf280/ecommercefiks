@@ -50,6 +50,30 @@
             <span>Status Server MariaDB</span>
         </div>
     </div>
+
+    <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #f97316, #c2410c);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+            </svg>
+        </div>
+        <div class="stat-info">
+            <h3>{{ total_produk|default:0 }}</h3>
+            <span>Total Produk</span>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/>
+            </svg>
+        </div>
+        <div class="stat-info">
+            <h3>{{ total_kategori|default:0 }}</h3>
+            <span>Kategori Produk</span>
+        </div>
+    </div>
 </div>
 
 <div class="content-card">
@@ -66,6 +90,9 @@
     </p>
     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
         <a href="{% url 'app:profile_admin' %}" class="btn-primary">Kelola Profil Admin</a>
+        <a href="{% url 'app:admin_katalog' %}" class="btn-primary" style="background:#c2410c;">🍞 Kelola Katalog Produk</a>
+        <a href="{% url 'app:admin_kategori' %}" class="btn-secondary">🏷️ Kelola Kategori</a>
+        <a href="{% url 'katalog' %}" class="btn-secondary" style="background:#fff7ed; color:#c2410c; border:1px solid #fed7aa; font-weight:700;">👁️ Lihat Katalog Publik</a>
         <a href="/admin/" class="btn-secondary" target="_blank">Buka Django Admin Site &rarr;</a>
     </div>
 </div>

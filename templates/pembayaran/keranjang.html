@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+  .cart-wrap {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 28px;
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .cart-wrap { grid-template-columns: 1fr; }
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .cart-table th {
+    text-align: left;
+    padding: 12px 14px;
+    background: #f8fafc;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .cart-table td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+  }
+  .cart-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #e2e8f0;
+    background: #fef3c7;
+  }
+  .cart-thumb-ph {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #fef3c7, #fed7aa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+  }
+  .qty-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .qty-btn {
+    width: 32px;
+    height: 32px;
+    background: #f8fafc;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #334155;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s;
+  }
+  .qty-btn:hover { background: #e2e8f0; }
+  .qty-val {
+    min-width: 36px;
+    text-align: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .cart-summary-box {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 90px;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.92rem;
+    color: #475569;
+    margin-bottom: 12px;
+  }
+  .summary-row.total {
+    border-top: 2px dashed #e2e8f0;
+    padding-top: 14px;
+    margin-top: 14px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .badge-free-shipping {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>🛒 {{ heading }}</h1>
+    <p>Periksa kembali produk roti dan pastry yang ingin Anda pesan</p>
+  </div>
+  <a href="{% url 'katalog' %}" class="btn-secondary">← Lanjut Belanja Roti Lain</a>
+</div>
+
+{% if is_empty %}
+<div class="content-card" style="text-align: center; padding: 60px 20px;">
+  <div style="font-size: 4.5rem; margin-bottom: 16px;">🥖</div>
+  <h2 style="font-size: 1.4rem; color: #0f172a; margin-bottom: 8px;">Keranjang Belanja Anda Masih Kosong</h2>
+  <p style="color: #64748b; margin-bottom: 24px;">Silakan jelajahi katalog bakery kami untuk memilih aneka roti dan cake segar favorit Anda.</p>
+  <a href="{% url 'katalog' %}" class="btn-primary" style="background:#c2410c; padding: 12px 28px; font-weight: 800; display: inline-flex;">
+    Buka Katalog Roti &amp; Bakery &rarr;
+  </a>
+</div>
+{% else %}
+<div class="cart-wrap">
+  <!-- Daftar Produk di Keranjang -->
+  <div class="content-card" style="padding: 10px 18px;">
+    <div style="overflow-x: auto;">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th colspan="2">Produk Roti</th>
+            <th>Harga Satuan</th>
+            <th>Jumlah</th>
+            <th>Subtotal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in cart_items %}
+          <tr>
+            <td style="width: 80px;">
+              {% if item.foto %}
+                <img src="{{ item.foto }}" alt="{{ item.nama }}" class="cart-thumb">
+              {% else %}
+                <div class="cart-thumb-ph">🍞</div>
+              {% endif %}
+            </td>
+            <td>
+              <strong style="color: #0f172a; font-size: 0.95rem; display: block;">{{ item.nama }}</strong>
+              <small style="color: #64748b;">Kemasan: per {{ item.satuan }}</small>
+            </td>
+            <td>
+              <span style="font-weight: 600; color: #334155;">Rp {{ item.harga|floatformat:0 }}</span>
+            </td>
+            <td>
+              <div class="qty-control">
+                <a href="{% url 'kurangi_keranjang' item.slug %}" class="qty-btn" title="Kurangi">−</a >
+                <span class="qty-val">{{ item.jumlah }}</span>
+                <form method="post" action="{% url 'tambah_keranjang' item.slug %}" style="display:inline;">
+                  {% csrf_token %}
+                  <input type="hidden" name="jumlah" value="1">
+                  <input type="hidden" name="next" value="{% url 'lihat_keranjang' %}">
+                  <button type="submit" class="qty-btn" title="Tambah">+</button>
+                </form>
+              </div>
+            </td>
+            <td>
+              <strong style="color: #c2410c; font-size: 1rem;">Rp {{ item.subtotal|floatformat:0 }}</strong>
+            </td>
+            <td>
+              <a href="{% url 'hapus_keranjang' item.slug %}" style="color: #ef4444; font-size: 0.85rem; font-weight: 700; text-decoration: none;" onclick="return confirm('Hapus item ini dari keranjang?');">
+                🗑️ Hapus
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Ringkasan & Tombol Checkout -->
+  <aside class="cart-summary-box">
+    <h3 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #f1f5f9;">
+      📋 Ringkasan Pesanan
+    </h3>
+
+    <div class="summary-row">
+      <span>Total Harga Produk</span>
+      <strong>Rp {{ total_harga|floatformat:0 }}</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Biaya Pengiriman</span>
+      {% if ongkir == 0 %}
+        <span class="badge-free-shipping">GRATIS ONGKIR</span>
+      {% else %}
+        <span>Rp {{ ongkir|floatformat:0 }}</span>
+      {% endif %}
+    </div>
+
+    {% if total_harga < 100000 and total_harga > 0 %}
+    <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 8px 12px; font-size: 0.78rem; color: #9a3412; margin-bottom: 12px;">
+      💡 Belanja Rp {{ 100000|floatformat:0 }} lagi untuk mendapatkan <strong>Gratis Ongkir</strong>!
+    </div>
+    {% endif %}
+
+    <div class="summary-row total">
+      <span>Total Bayar</span>
+      <span style="color: #c2410c; font-size: 1.3rem;">Rp {{ grand_total|floatformat:0 }}</span>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <a href="{% url 'checkout' %}" class="btn-primary" style="width: 100%; justify-content: center; background: #c2410c; padding: 12px 20px; font-size: 1rem; font-weight: 800; box-shadow: 0 4px 14px rgba(194,65,12,0.35);">
+        💳 Lanjut ke Checkout &rarr;
+      </a>
+    </div>
+
+    <div style="margin-top: 14px; text-align: center;">
+      <span style="font-size: 0.75rem; color: #64748b; display: inline-flex; align-items: center; gap: 4px;">
+        🔒 Pembayaran Terproteksi Sandbox Gateway
+      </span>
+    </div>
+  </aside>
+</div>
+{% endif %}
+{% endblock %}
+

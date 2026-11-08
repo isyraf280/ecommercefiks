@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context_processors.cart_context',
             ],
         },
     },
@@ -81,7 +82,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': '201601411Ojan',
         'HOST': '127.0.0.1',
-        'PORT': '3309',
+        'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
         },

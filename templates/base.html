@@ -14,20 +14,29 @@
 <body>
     <!-- Top Navigation Bar -->
     <nav class="navbar">
-        <a href="{% url 'app:dashboard' %}" class="nav-brand">
-            <div class="brand-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                </svg>
+        <a href="{% url 'home' %}" class="nav-brand">
+            <div class="brand-icon" style="background: linear-gradient(135deg, #c2410c, #f59e0b);">
+                🍞
             </div>
-            <span>E-Commerce Portal</span>
+            <span>Lesaffrone</span>
         </a>
 
         <div class="nav-menu">
+            <a href="{% url 'home' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px;">🏠 Beranda</a>
+            <a href="{% url 'katalog' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px; background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; font-weight: 700;">🛒 Katalog Roti</a>
+            
+            <a href="{% url 'lihat_keranjang' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px; position: relative; font-weight: 700; color: #c2410c; background: #ffffff; border: 1px solid #fed7aa;">
+                🛒 Keranjang
+                {% if cart_total_qty and cart_total_qty > 0 %}
+                <span style="display:inline-block; background:#dc2626; color:#ffffff; font-size:0.7rem; font-weight:800; border-radius:999px; padding:1px 6px; margin-left:4px;">{{ cart_total_qty }}</span>
+                {% endif %}
+            </a>
+
             {% if request.user.is_authenticated %}
+                <a href="{% url 'riwayat_pesanan' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px;">📦 Pesanan Saya</a>
+
                 <div class="user-badge">
-                    <div class="user-avatar">
+                    <div class="user-avatar" style="background:#c2410c;">
                         {% if photo %}
                             <img src="{{ photo.url }}" alt="{{ request.user.username }}">
                         {% else %}
@@ -38,8 +47,12 @@
                 </div>
 
                 {% if request.user.is_superuser or request.user.last_name == 'Super Admin' %}
+                    <a href="{% url 'app:admin_pesanan' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px; background:#eff6ff; color:#1d4ed8; font-weight:700;">📦 Kelola Pesanan</a>
+                    <a href="{% url 'app:admin_katalog' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px; background:#fef3c7; color:#78350f;">🍞 Kelola Roti</a>
+                    <a href="{% url 'app:dashboard' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px;">Dashboard</a>
                     <a href="{% url 'app:profile_admin' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px;">Profil Admin</a>
                 {% else %}
+                    <a href="{% url 'app:dashboard' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px;">Dashboard</a>
                     <a href="{% url 'app:profile_pengguna' %}" class="btn-secondary" style="font-size: 0.84rem; padding: 6px 12px;">Profil Saya</a>
                 {% endif %}
 
@@ -52,7 +65,8 @@
                     <span>Keluar</span>
                 </a>
             {% else %}
-                <a href="{% url 'login' %}" class="btn-primary">Masuk</a>
+                <a href="{% url 'login' %}" class="btn-primary" style="background:#c2410c;">Masuk</a>
+                <a href="{% url 'register' %}" class="btn-secondary">Daftar</a>
             {% endif %}
         </div>
     </nav>

@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+  .katalog-toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .katalog-toolbar form {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    min-width: 240px;
+  }
+  .katalog-toolbar .search-input {
+    flex: 1;
+    padding: 9px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .katalog-toolbar .search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+  }
+  .btn-danger {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .btn-danger:hover { background: #fecaca; }
+  .btn-success {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+  }
+  .btn-success:hover { background: #bbf7d0; }
+
+  .produk-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .produk-table th {
+    text-align: left;
+    padding: 10px 14px;
+    background: #f1f5f9;
+    font-weight: 700;
+    color: #334155;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .produk-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #475569;
+    vertical-align: middle;
+  }
+  .produk-table tr:hover td { background: #f8fafc; }
+
+  .foto-thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  .foto-placeholder {
+    width: 56px;
+    height: 56px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 1.4rem;
+    border: 1px solid #e2e8f0;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-green { background: #dcfce7; color: #15803d; }
+  .badge-red { background: #fee2e2; color: #b91c1c; }
+  .badge-yellow { background: #fef9c3; color: #854d0e; }
+  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .empty-state {
+    text-align: center;
+    padding: 48px 20px;
+    color: #94a3b8;
+  }
+  .empty-state svg { margin-bottom: 16px; opacity: 0.4; }
+  .select-filter {
+    padding: 9px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: #334155;
+  }
+  .table-actions { display: flex; gap: 6px; }
+  .stat-icon.orange { background: linear-gradient(135deg, #f97316, #c2410c); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>{{ heading }}</h1>
+    <p>Kelola semua produk roti &amp; bakery yang tersedia di e-commerce</p>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <a href="{% url 'app:admin_kategori' %}" class="btn-secondary">🏷️ Kelola Kategori</a>
+    <a href="{% url 'app:admin_tambah_produk' %}" class="btn-primary">+ Tambah Produk</a>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon blue">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+      </svg>
+    </div>
+    <div class="stat-info"><h3>{{ total_produk }}</h3><span>Total Produk</span></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon green">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+    <div class="stat-info"><h3>{{ total_tersedia }}</h3><span>Produk Tersedia</span></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-icon orange">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </div>
+    <div class="stat-info"><h3>{{ total_habis }}</h3><span>Stok Habis</span></div>
+  </div>
+</div>
+
+<!-- Toolbar -->
+<div class="content-card">
+  <div class="katalog-toolbar">
+    <form method="get">
+      <input type="text" name="q" value="{{ q }}" class="search-input" placeholder="Cari nama produk...">
+      <select name="kategori" class="select-filter">
+        <option value="">Semua Kategori</option>
+        {% for kat in kategori_all %}
+          <option value="{{ kat.id }}" {% if kategori_filter == kat.id|stringformat:"s" %}selected{% endif %}>{{ kat.nama }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn-primary">Cari</button>
+      {% if q or kategori_filter %}
+        <a href="{% url 'app:admin_katalog' %}" class="btn-secondary">Reset</a>
+      {% endif %}
+    </form>
+  </div>
+
+  {% if produk_list %}
+  <div style="overflow-x:auto;">
+    <table class="produk-table">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Nama Produk</th>
+          <th>Kategori</th>
+          <th>Harga</th>
+          <th>Stok</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in produk_list %}
+        <tr>
+          <td>
+            {% if p.foto %}
+              <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}" class="foto-thumb">
+            {% else %}
+              <div class="foto-placeholder">🍞</div>
+            {% endif %}
+          </td>
+          <td>
+            <strong>{{ p.nama_produk }}</strong>
+            {% if p.unggulan %}<br><span class="badge badge-yellow">⭐ Unggulan</span>{% endif %}
+          </td>
+          <td>{{ p.kategori.nama|default:"—" }}</td>
+          <td><strong>Rp {{ p.harga|floatformat:0 }}</strong><br><small>/ {{ p.satuan }}</small></td>
+          <td>
+            {% if p.stok == 0 %}
+              <span class="badge badge-red">Habis</span>
+            {% elif p.stok <= 5 %}
+              <span class="badge badge-yellow">{{ p.stok }} {{ p.satuan }}</span>
+            {% else %}
+              <span class="badge badge-green">{{ p.stok }} {{ p.satuan }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if p.tersedia %}
+              <span class="badge badge-green">Aktif</span>
+            {% else %}
+              <span class="badge badge-red">Nonaktif</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="table-actions">
+              <a href="{% url 'app:admin_edit_produk' p.slug %}" class="btn-secondary" title="Edit">✏️</a>
+              <a href="{% url 'app:admin_hapus_produk' p.slug %}" class="btn-danger" title="Hapus">🗑️</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+    </svg>
+    <p>Belum ada produk{% if q %} yang cocok dengan "<strong>{{ q }}</strong>"{% endif %}.</p>
+    <div style="margin-top:16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <a href="{% url 'seed_katalog' %}" class="btn-primary" style="background:#c2410c;">✨ Masukkan 12 Produk Dummy Otomatis</a>
+      <a href="{% url 'app:admin_tambah_produk' %}" class="btn-secondary">+ Tambah Manual</a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+
