@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="padding-top: 20px; padding-bottom: 70px;">
+  <!-- ── ABOUT HERO / STORY ────────────────────────────── -->
+  <section class="section story" style="background: transparent; padding: 20px 0 70px;">
+    <div class="story-grid">
+      <div class="story-visual">
+        <div class="story-main">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85" alt="Baker preparing artisan bread" />
+        </div>
+        <div class="story-small">
+          <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=650&q=85" alt="Fresh artisan pastry" />
+        </div>
+        <div class="story-badge">
+          Baked with<br/>a little<br/>wonder
+        </div>
+      </div>
+      <div class="story-copy">
+        <span class="eyebrow">About Lesaffrone Bakery</span>
+        <h1 class="display" style="font-size: clamp(38px, 4.2vw, 58px); margin: 20px 0 24px; line-height: 1.12;">
+          A love letter to<br/><em>slow</em> mornings.
+        </h1>
+        <p class="body-copy">
+          Lesaffrone lahir dari satu keyakinan sederhana: hal-hal terbaik dalam hidup tidak pernah terburu-buru. Kami memulai hari saat fajar belum menyapa, menimbang bahan dengan teliti, melipat adonan lapis demi lapis dengan sabar, dan membiarkan waktu melakukan keajaibannya melalui fermentasi alami.
+        </p>
+        <p class="body-copy">
+          Kami memilih bahan yang jujur — tanpa emulsifier buatan, tanpa pengawet sintetis. Dari mentega Eropa bersertifikasi hingga tepung gandum utuh terpilih, setiap resep dibuat untuk menghadirkan rasa hangat yang akrab di meja makan keluarga Anda.
+        </p>
+        <div class="signature" style="margin-top: 36px;">
+          <span class="signature-script">With warmth,</span>
+          <div>
+            <b style="font-size: 15px;">Lesaffrone Artisan Team</b>
+            <small style="color: var(--muted); letter-spacing: .12em; text-transform: uppercase;">Our Bakers, Flour-Lovers &amp; Dreamers</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PHILOSOPHY STATS / VALUES ─────────────────────── -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 70px;">
+    <div style="background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 26px; text-align: center;">
+      <span style="font-family: var(--serif); font-size: 44px; color: var(--terra); font-weight: 600; display: block; margin-bottom: 6px;">24h</span>
+      <h4 style="font-family: var(--serif); font-size: 18px; margin: 0 0 8px;">Cold Fermentation</h4>
+      <p style="color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0;">Memberikan tekstur rongga yang sempurna dan mudah dicerna oleh tubuh.</p>
+    </div>
+    <div style="background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 26px; text-align: center;">
+      <span style="font-family: var(--serif); font-size: 44px; color: var(--sage); font-weight: 600; display: block; margin-bottom: 6px;">100%</span>
+      <h4 style="font-family: var(--serif); font-size: 18px; margin: 0 0 8px;">Pure French Butter</h4>
+      <p style="color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0;">Aroma gurih mentega murni asli tanpa campuran margarin atau lemak sintetis.</p>
+    </div>
+    <div style="background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 26px; text-align: center;">
+      <span style="font-family: var(--serif); font-size: 44px; color: var(--gold); font-weight: 600; display: block; margin-bottom: 6px;">0%</span>
+      <h4 style="font-family: var(--serif); font-size: 18px; margin: 0 0 8px;">Preservatives</h4>
+      <p style="color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0;">Dipanggang segar setiap subuh, siap dinikmati di hari yang sama dengan rasa alami.</p>
+    </div>
+    <div style="background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 26px; text-align: center;">
+      <span style="font-family: var(--serif); font-size: 44px; color: var(--ink); font-weight: 600; display: block; margin-bottom: 6px;">1,200+</span>
+      <h4 style="font-family: var(--serif); font-size: 18px; margin: 0 0 8px;">Happy Mornings</h4>
+      <p style="color: var(--muted); font-size: 12px; line-height: 1.6; margin: 0;">Menemani ribuan cangkir kopi dan meja sarapan hangat di berbagai sudut kota.</p>
+    </div>
+  </div>
+
+  <!-- ── THE LESAFFRONE WAY / PROCESS ─────────────────── -->
+  <section class="section process" style="border-radius: var(--radius); margin-bottom: 70px;">
+    <span class="eyebrow">The Lesaffrone craft</span>
+    <h2 class="display">Good bread asks for<br/><em>good things.</em></h2>
+    <div class="process-grid">
+      <div class="process-item">
+        <span class="process-number">01 /</span>
+        <h3>Honest ingredients</h3>
+        <p>Kami percaya kelezatan sejati berakar dari bahan murni pilihan: butter kaya rasa, tepung berstandar tinggi, dan ragi alami tanpa pengawet.</p>
+      </div>
+      <div class="process-item">
+        <span class="process-number">02 /</span>
+        <h3>Time &amp; tenderness</h3>
+        <p>Adonan tidak pernah diburu-buru. Setiap lipatan, laminasi, dan fermentasi 24 jam dirawat dengan kelembutan tangan baker kami.</p>
+      </div>
+      <div class="process-item">
+        <span class="process-number">03 /</span>
+        <h3>Made to be shared</h3>
+        <p>Oven kami berdetak sebelum matahari terbit, memastikan roti yang sampai di tangan Anda adalah kehangatan terbaik hari ini.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INGREDIENTS & CRAFT FOCUS ─────────────────────── -->
+  <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 70px; background: var(--cream); border-radius: var(--radius); padding: 48px; border: 1px solid var(--line);">
+    <div>
+      <span class="eyebrow">Our Kitchen Standards</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(30px, 3.2vw, 44px); margin: 14px 0 20px; font-weight: 500; color: var(--ink);">
+        Menghormati setiap butir gandum dan tetes mentega.
+      </h2>
+      <p style="color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 16px;">
+        Bagi kami, membuat roti adalah perpaduan antara sains mikrobiologi dan seni ketekunan. Kami menjaga kelembapan ruangan, mengukur temperatur air hingga derajat presisi, dan terus merawat biang ragi alami yang telah kami kembangkan selama bertahun-tahun.
+      </p>
+      <p style="color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 28px;">
+        Hasilnya adalah roti dengan kerak renyah keemasan, remah yang lembut berongga, dan aroma karamel mentega yang tak lekang oleh waktu.
+      </p>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <a href="{% url 'katalog' %}" class="btn">Jelajahi Toko Roti <span>↗</span></a>
+        <a href="{% url 'journal' %}" class="btn btn-outline">Baca Journal Dapur <span>→</span></a>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=85" alt="Fresh croissants" style="border-radius: 14px; height: 210px; width: 100%; object-fit: cover;" />
+      <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&q=85" alt="Artisan bread slices" style="border-radius: 14px; height: 210px; width: 100%; object-fit: cover; margin-top: 24px;" />
+      <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=600&q=85" alt="Sourdough loaf" style="border-radius: 14px; height: 210px; width: 100%; object-fit: cover;" />
+      <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=600&q=85" alt="Baking table" style="border-radius: 14px; height: 210px; width: 100%; object-fit: cover; margin-top: 24px;" />
+    </div>
+  </section>
+
+  <!-- ── ARTISAN QUOTE ─────────────────────────────────── -->
+  <section class="quote-section" style="border-radius: var(--radius); margin-bottom: 70px;">
+    <div class="quote-mark">“</div>
+    <blockquote>Some moments are meant to be savoured. A warm pastry, a familiar face, and nowhere else to be.</blockquote>
+    <small>A little reminder from Lesaffrone Artisan Bakery</small>
+  </section>
+
+  <!-- ── CTA BANNER ────────────────────────────────────── -->
+  <div style="background: var(--ink); color: #fff; border-radius: var(--radius); padding: 50px 40px; text-align: center;">
+    <h3 style="font-family: var(--serif); font-size: 32px; font-weight: 500; margin: 0 0 14px; color: #fbf5e9;">Siap Menikmati Kehangatan Lesaffrone?</h3>
+    <p style="color: #b5a99f; font-size: 13px; max-width: 520px; margin: 0 auto 28px; line-height: 1.7;">
+      Pesan roti favorit Anda sekarang dan nikmati gratis ongkir untuk pemesanan minimal Rp100.000.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+      <a href="{% url 'katalog' %}" class="btn" style="background: var(--terra); color: white; border: none;">Pesan Roti Segar <span>↗</span></a>
+      <a href="{% url 'contact' %}" class="btn btn-outline" style="border-color: #57483e; color: #fff;">Hubungi Kami <span>→</span></a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

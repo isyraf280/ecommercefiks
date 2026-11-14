@@ -19,110 +19,114 @@
   .katalog-toolbar .search-input {
     flex: 1;
     padding: 9px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: inherit;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 13px;
+    color: var(--ink);
   }
   .katalog-toolbar .search-input:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79,70,229,.15);
+    border-color: var(--terra);
   }
   .btn-danger {
-    background: #fee2e2;
-    color: #b91c1c;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.84rem;
+    background: #fbf0ec;
+    color: var(--terra-dark);
+    padding: 6px 12px;
+    border: 1px solid #f3d4cb;
+    border-radius: 6px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     transition: 0.2s;
   }
-  .btn-danger:hover { background: #fecaca; }
+  .btn-danger:hover { background: #f7ded6; }
   .btn-success {
-    background: #dcfce7;
-    color: #15803d;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.84rem;
+    background: var(--sage-light);
+    color: #4b5539;
+    padding: 6px 12px;
+    border: 1px solid #cbd0be;
+    border-radius: 6px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     transition: 0.2s;
   }
-  .btn-success:hover { background: #bbf7d0; }
+  .btn-success:hover { background: #dce0ce; }
 
   .produk-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.88rem;
+    font-size: 13px;
   }
   .produk-table th {
     text-align: left;
-    padding: 10px 14px;
-    background: #f1f5f9;
+    padding: 12px 14px;
+    background: var(--paper);
     font-weight: 700;
-    color: #334155;
-    border-bottom: 2px solid #e2e8f0;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
   }
   .produk-table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #475569;
+    padding: 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
     vertical-align: middle;
   }
-  .produk-table tr:hover td { background: #f8fafc; }
+  .produk-table tr:hover td { background: var(--paper); }
 
   .foto-thumb {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--line);
   }
   .foto-placeholder {
-    width: 56px;
-    height: 56px;
-    background: #f1f5f9;
+    width: 52px;
+    height: 52px;
+    background: var(--paper-2);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
+    color: var(--muted);
     font-size: 1.4rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--line);
   }
   .badge {
     display: inline-block;
     padding: 3px 10px;
     border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
   }
-  .badge-green { background: #dcfce7; color: #15803d; }
-  .badge-red { background: #fee2e2; color: #b91c1c; }
-  .badge-yellow { background: #fef9c3; color: #854d0e; }
-  .badge-blue { background: #dbeafe; color: #1d4ed8; }
+  .badge-green { background: var(--sage-light); color: #4b5539; }
+  .badge-red { background: #fbf0ec; color: var(--terra); }
+  .badge-yellow { background: #fdf3e7; color: #a77b3c; }
+  .badge-blue { background: #efe7da; color: var(--ink); }
   .empty-state {
     text-align: center;
     padding: 48px 20px;
-    color: #94a3b8;
+    color: var(--muted);
   }
   .empty-state svg { margin-bottom: 16px; opacity: 0.4; }
   .select-filter {
-    padding: 9px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: inherit;
-    color: #334155;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 11px;
+    background: var(--paper);
+    color: var(--ink);
   }
   .table-actions { display: flex; gap: 6px; }
-  .stat-icon.orange { background: linear-gradient(135deg, #f97316, #c2410c); }
 </style>
 {% endblock %}
 

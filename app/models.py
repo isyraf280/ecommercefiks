@@ -124,6 +124,10 @@ class KategoriProduk(models.Model):
     def __str__(self):
         return self.nama
 
+    @property
+    def nama_kategori(self):
+        return self.nama
+
 
 def rename_foto_produk(instance, filename):
     ext = filename.split('.')[-1]

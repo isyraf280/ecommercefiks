@@ -3,88 +3,88 @@
 
 {% block extra_head %}
 <style>
-  :root {
-    --bakery-primary: #c2410c;
-    --bakery-accent: #f59e0b;
-    --bakery-light: #fff7ed;
-  }
-
   /* ── Header Banner Katalog ── */
   .katalog-banner {
-    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
-    border: 1px solid #fed7aa;
-    border-radius: 16px;
-    padding: 32px 28px;
-    margin-bottom: 28px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
+    box-shadow: 0 10px 30px rgba(62, 43, 30, 0.04);
   }
   .katalog-banner h1 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #1c1917;
+    font-family: var(--serif);
+    font-size: clamp(26px, 3.2vw, 38px);
+    font-weight: 500;
+    color: var(--ink);
     margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    line-height: 1.2;
   }
   .katalog-banner p {
-    color: #78716c;
-    font-size: 0.95rem;
+    color: var(--muted);
+    font-size: 13px;
     max-width: 520px;
+    line-height: 1.6;
   }
   .banner-badge-count {
-    background: #fff;
-    padding: 10px 18px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    border: 1px solid #fed7aa;
+    background: var(--paper);
+    padding: 14px 22px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
     text-align: right;
   }
   .banner-badge-count strong {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--bakery-primary);
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--terra);
     display: block;
+    line-height: 1;
   }
   .banner-badge-count span {
-    font-size: 0.78rem;
-    color: #78716c;
-    font-weight: 600;
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
   }
 
   /* ── Layout Grid ── */
   .katalog-layout {
     display: grid;
     grid-template-columns: 260px 1fr;
-    gap: 28px;
+    gap: 32px;
     align-items: start;
   }
-  @media (max-width: 820px) {
+  @media (max-width: 860px) {
     .katalog-layout { grid-template-columns: 1fr; }
     .katalog-sidebar { display: none; }
   }
 
   /* ── Sidebar Filter ── */
   .katalog-sidebar {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px;
-    box-shadow: var(--shadow);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
     position: sticky;
-    top: 86px;
+    top: 96px;
+    box-shadow: 0 4px 15px rgba(62, 43, 30, 0.03);
   }
   .sidebar-title {
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #1e293b;
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #f1f5f9;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -93,77 +93,70 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 12px;
-    border-radius: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
     text-decoration: none;
-    color: #475569;
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: 0.18s ease;
+    color: var(--ink);
+    font-size: 13px;
     margin-bottom: 4px;
+    transition: 0.2s;
   }
   .sidebar-link:hover {
-    background: var(--bakery-light);
-    color: var(--bakery-primary);
+    background: var(--paper);
+    color: var(--terra);
   }
   .sidebar-link.active {
-    background: var(--bakery-primary);
-    color: #ffffff;
-    font-weight: 700;
+    background: var(--ink);
+    color: #fffaf2;
+    font-weight: 600;
   }
   .sidebar-badge {
-    font-size: 0.75rem;
+    font-size: 10px;
     padding: 2px 8px;
     border-radius: 999px;
-    background: #f1f5f9;
-    color: #64748b;
+    background: rgba(0,0,0,0.06);
   }
   .sidebar-link.active .sidebar-badge {
-    background: rgba(255,255,255,0.25);
-    color: #ffffff;
+    background: var(--terra);
+    color: white;
   }
 
-  /* ── Filter Bar & Toolbar ── */
+  /* ── Toolbar Pencarian & Filter ── */
   .katalog-toolbar {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 18px;
-    margin-bottom: 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
-    box-shadow: var(--shadow);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 24px;
   }
   .toolbar-form {
     display: flex;
-    gap: 10px;
-    flex: 1;
-    min-width: 260px;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
   }
   .toolbar-search {
     flex: 1;
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: inherit;
+    min-width: 220px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    padding: 8px 4px;
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
   }
   .toolbar-search:focus {
-    outline: none;
-    border-color: var(--bakery-primary);
-    box-shadow: 0 0 0 3px rgba(194,65,12,0.12);
+    border-color: var(--terra);
   }
   .toolbar-select {
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-family: inherit;
-    color: #334155;
-    background: #fff;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+    font-size: 11px;
+    color: var(--ink);
+    outline: none;
     cursor: pointer;
   }
 
@@ -172,192 +165,178 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
   .filter-pill {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: var(--bakery-light);
-    border: 1px solid #fed7aa;
-    color: var(--bakery-primary);
-    padding: 5px 12px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--terra);
+    padding: 4px 12px;
     border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
   }
   .filter-pill a {
-    color: var(--bakery-primary);
+    color: var(--terra);
     text-decoration: none;
     font-weight: 800;
+    margin-left: 4px;
   }
 
   /* ── Produk Card Grid ── */
   .katalog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
   }
   .katalog-card {
-    background: #ffffff;
-    border: 1px solid var(--border);
+    background: var(--cream);
+    border: 1px solid var(--line);
     border-radius: 14px;
     overflow: hidden;
-    transition: 0.25s ease;
-    text-decoration: none;
-    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
   }
   .katalog-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 28px rgba(0,0,0,0.08);
-    border-color: #fed7aa;
+    box-shadow: 0 16px 36px rgba(62, 43, 30, 0.08);
   }
   .card-media {
     position: relative;
     width: 100%;
-    height: 180px;
+    height: 200px;
     overflow: hidden;
-    background: linear-gradient(135deg, #fef3c7, #fed7aa);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--paper-2);
   }
   .card-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
   }
   .katalog-card:hover .card-media img {
     transform: scale(1.05);
-  }
-  .card-media-icon {
-    font-size: 4rem;
   }
   .card-badge-top {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: linear-gradient(135deg, #f59e0b, #ea580c);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 0.72rem;
+    background: rgba(255, 253, 248, 0.95);
+    color: var(--terra-dark);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 8px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
     font-weight: 700;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   }
   .card-badge-habis {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(220,38,38,0.9);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 0.72rem;
+    background: #fbf0ec;
+    color: var(--terra);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 8px;
     font-weight: 700;
+    text-transform: uppercase;
   }
 
   .card-content {
-    padding: 16px;
-    flex: 1;
+    padding: 18px;
     display: flex;
     flex-direction: column;
+    flex: 1;
   }
   .card-kategori {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--bakery-primary);
+    color: var(--terra);
+    font-size: 9px;
+    letter-spacing: .12em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-weight: 700;
     margin-bottom: 4px;
   }
   .card-title {
-    font-size: 0.98rem;
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.35;
-    margin-bottom: 8px;
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.25;
   }
   .card-desc {
-    font-size: 0.8rem;
-    color: #64748b;
-    line-height: 1.5;
-    margin-bottom: 12px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+    margin-bottom: 14px;
     flex: 1;
   }
   .card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: auto;
-    padding-top: 10px;
-    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
   }
   .card-price {
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: var(--bakery-primary);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--terra-dark);
   }
   .card-unit {
-    font-size: 0.72rem;
-    color: #94a3b8;
+    font-size: 9px;
+    color: var(--muted);
   }
   .btn-card-detail {
-    background: var(--bakery-light);
-    color: var(--bakery-primary);
     padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.8rem;
+    border-radius: 999px;
+    font-size: 9px;
     font-weight: 700;
-    border: 1px solid #fed7aa;
-    text-decoration: none;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: transparent;
     transition: 0.2s;
   }
   .katalog-card:hover .btn-card-detail {
-    background: var(--bakery-primary);
-    color: #fff;
-    border-color: var(--bakery-primary);
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
   }
 
-  /* Empty state */
+  /* Empty State */
   .katalog-empty {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 56px 24px;
     text-align: center;
-    color: #64748b;
-  }
-  .katalog-empty-icon {
-    font-size: 4rem;
-    margin-bottom: 14px;
+    padding: 60px 20px;
+    background: var(--cream);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
   }
   .katalog-empty h3 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 6px;
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    margin: 12px 0 6px;
   }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- ── HEADER BANNER ─────────────────────────────────── -->
+<!-- Banner Katalog -->
 <div class="katalog-banner">
   <div>
-    <h1>🍞 {{ heading|default:"Katalog Roti & Bakery Lesaffrone" }}</h1>
-    <p>
-      Jelajahi pilihan roti empuk, croissant berlapis mentega, bolu panggang, dan aneka olahan bakery segar berkualitas.
-    </p>
+    <span class="eyebrow" style="margin-bottom:8px;">Boutique Bakery Catalog</span>
+    <h1>{{ heading }}</h1>
+    <p>Jelajahi pilihan roti lembut, croissant berlapis mentega Prancis, sourdough fermentasi alami, dan aneka olahan pastry segar kami.</p>
   </div>
   <div class="banner-badge-count">
     <strong>{{ total_ditemukan }}</strong>
@@ -365,13 +344,12 @@
   </div>
 </div>
 
-<!-- ── LAYOUT UTAMA ──────────────────────────────────── -->
 <div class="katalog-layout">
   <!-- Sidebar Kategori (Desktop) -->
   <aside class="katalog-sidebar">
     <div class="sidebar-title">
-      <span>🏷️ Kategori Roti</span>
-      <span style="font-size:0.75rem; color:#94a3b8;">{{ kategori_all.count }} Kategori</span>
+      <span>Kategori Roti</span>
+      <span>{{ kategori_all.count }} Kategori</span>
     </div>
 
     <a href="{% url 'katalog' %}{% if q %}?q={{ q }}{% endif %}" class="sidebar-link {% if not kategori_slug %}active{% endif %}">
@@ -381,21 +359,13 @@
 
     {% for kat in kategori_all %}
     <a href="{% url 'katalog' %}?kategori={{ kat.slug }}{% if q %}&q={{ q }}{% endif %}{% if sort %}&sort={{ sort }}{% endif %}" class="sidebar-link {% if kategori_slug == kat.slug %}active{% endif %}">
-      <span>
-        {% if 'Manis' in kat.nama %}🥐
-        {% elif 'Tawar' in kat.nama %}🍞
-        {% elif 'Pastry' in kat.nama %}🥨
-        {% elif 'Cake' in kat.nama %}🍰
-        {% elif 'Gurih' in kat.nama or 'Daging' in kat.nama %}🥖
-        {% else %}🧁{% endif %}
-        {{ kat.nama }}
-      </span>
+      <span>{{ kat.nama|default:kat.nama_kategori }}</span>
       <span class="sidebar-badge">{{ kat.produk.count }}</span>
     </a>
     {% endfor %}
   </aside>
 
-  <!-- Konten Katalog -->
+  <!-- Konten Utama Katalog -->
   <div>
     <!-- Toolbar Pencarian & Urutan -->
     <div class="katalog-toolbar">
@@ -411,17 +381,17 @@
           <option value="unggulan" {% if sort == 'unggulan' %}selected{% endif %}>⭐ Menu Unggulan</option>
         </select>
 
-        <button type="submit" class="btn-primary" style="background:#c2410c;">Cari</button>
+        <button type="submit" class="btn btn-primary" style="padding:8px 16px;">Cari</button>
       </form>
     </div>
 
     <!-- Active Filter Indicators -->
     {% if q or kategori_slug or sort != 'terbaru' %}
     <div class="active-filter-bar">
-      <span style="font-size:0.84rem; color:#64748b;">Filter aktif:</span>
+      <span style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em;">Filter aktif:</span>
       {% if selected_kategori %}
         <span class="filter-pill">
-          🏷️ {{ selected_kategori.nama }}
+          🏷️ {{ selected_kategori.nama|default:selected_kategori.nama_kategori }}
           <a href="{% url 'katalog' %}{% if q %}?q={{ q }}{% endif %}{% if sort %}&sort={{ sort }}{% endif %}" title="Hapus filter">✕</a>
         </span>
       {% endif %}
@@ -431,7 +401,7 @@
           <a href="{% url 'katalog' %}{% if kategori_slug %}?kategori={{ kategori_slug }}{% endif %}{% if sort %}&sort={{ sort }}{% endif %}" title="Hapus pencarian">✕</a>
         </span>
       {% endif %}
-      <a href="{% url 'katalog' %}" style="font-size:0.82rem; color:#c2410c; font-weight:700; text-decoration:none; margin-left:6px;">Reset Semua</a>
+      <a href="{% url 'katalog' %}" style="font-size:11px; color:var(--terra); font-weight:700; margin-left:6px;">Reset Semua</a>
     </div>
     {% endif %}
 
@@ -439,18 +409,12 @@
     {% if produk_list %}
     <div class="katalog-grid">
       {% for p in produk_list %}
-      <a href="{% url 'detail_produk' p.slug %}" class="katalog-card">
-        <div class="card-media">
+      <div class="katalog-card">
+        <a href="{% url 'detail_produk' p.slug %}" class="card-media">
           {% if p.foto %}
             <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}">
           {% else %}
-            <div class="card-media-icon">
-              {% if 'Pastry' in p.kategori.nama or 'Croissant' in p.nama_produk %}🥐
-              {% elif 'Cake' in p.kategori.nama or 'Bolu' in p.nama_produk %}🍰
-              {% elif 'Tawar' in p.nama_produk %}🍞
-              {% elif 'Abon' in p.nama_produk or 'Sosis' in p.nama_produk %}🥖
-              {% else %}🍞{% endif %}
-            </div>
+            <div style="height:100%; display:grid; place-items:center; font-size:3rem; background:var(--paper);">🍞</div>
           {% endif %}
 
           {% if p.unggulan %}
@@ -460,10 +424,10 @@
           {% if p.stok == 0 %}
             <span class="card-badge-habis">Habis</span>
           {% endif %}
-        </div>
+        </a>
 
         <div class="card-content">
-          <div class="card-kategori">{{ p.kategori.nama|default:"Bakery" }}</div>
+          <div class="card-kategori">{{ p.kategori.nama|default:p.kategori.nama_kategori|default:"Bakery" }}</div>
           <h3 class="card-title">{{ p.nama_produk }}</h3>
           <p class="card-desc">{{ p.deskripsi|default:"Roti empuk kualitas premium dibuat dari bahan pilihan alami." }}</p>
 
@@ -472,37 +436,32 @@
               <div class="card-price">Rp {{ p.harga|floatformat:0 }}</div>
               <div class="card-unit">per {{ p.satuan }}{% if p.berat_gram %} · {{ p.berat_gram }}g{% endif %}</div>
             </div>
-            <span class="btn-card-detail">Detail Roti</span>
+            <div style="display:flex; gap:6px;">
+              <a href="{% url 'detail_produk' p.slug %}" class="btn-card-detail">Detail</a>
+              <a href="{% url 'beli_sekarang' p.slug %}" class="btn-card-detail" style="background:var(--ink); color:#fff; border-color:var(--ink);" title="Beli Langsung">+ 🛒</a>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
       {% endfor %}
     </div>
     {% else %}
     <div class="katalog-empty">
-      <div class="katalog-empty-icon">🥖</div>
+      <div style="font-size:3rem;">🥖</div>
       <h3>Tidak Ada Produk yang Ditemukan</h3>
-      <p>
+      <p class="body-copy">
         {% if q %}
           Tidak ada roti atau pastry yang cocok dengan kata kunci "<strong>{{ q }}</strong>".
         {% elif kategori_slug %}
           Belum ada produk dalam kategori ini.
         {% else %}
-          Database produk saat ini masih kosong. Silakan klik tombol di bawah untuk otomatis memasukkan 12 produk dummy beserta foto banner dan harganya ke database MySQL!
+          Database produk belum terisi.
         {% endif %}
       </p>
-      <div style="margin-top: 20px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-        {% if total_semua == 0 %}
-          <a href="{% url 'seed_katalog' %}" class="btn-primary" style="background:#c2410c; padding: 12px 26px; font-size:1rem; font-weight:800; box-shadow: 0 4px 15px rgba(194,65,12,0.35);">
-            ✨ Isi 12 Produk Dummy Otomatis
-          </a>
-        {% else %}
-          <a href="{% url 'katalog' %}" class="btn-primary" style="background:#c2410c;">Lihat Semua Roti</a>
-        {% endif %}
-        <a href="{% url 'home' %}" class="btn-secondary">Ke Beranda Toko</a>
-      </div>
+      <a href="{% url 'katalog' %}" class="btn btn-outline" style="margin-top:16px;">Tampilkan Semua Produk</a>
     </div>
     {% endif %}
+
   </div>
 </div>
 {% endblock %}

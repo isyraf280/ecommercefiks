@@ -8,97 +8,66 @@
     margin: 20px auto 40px;
   }
 
-  .history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .history-header h1 {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0;
-  }
-
   .order-card {
-    background: #ffffff;
-    border: 1px solid #fed7aa;
-    border-radius: 16px;
-    padding: 20px 24px;
-    margin-bottom: 18px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(62, 43, 30, 0.03);
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
   .order-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(194, 65, 12, 0.08);
+    box-shadow: 0 10px 25px rgba(62, 43, 30, 0.08);
   }
 
   .order-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--line);
     padding-bottom: 14px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
     gap: 10px;
   }
 
   .order-number {
-    font-family: 'Courier New', monospace;
-    font-weight: 800;
-    color: #c2410c;
-    font-size: 0.95rem;
-    background: #fff7ed;
-    padding: 2px 8px;
+    font-family: monospace;
+    font-weight: 700;
+    color: var(--terra-dark);
+    font-size: 13px;
+    background: var(--paper);
+    padding: 3px 10px;
     border-radius: 6px;
+    border: 1px solid var(--line);
   }
 
   .order-date {
-    font-size: 0.82rem;
-    color: #64748b;
+    font-size: 12px;
+    color: var(--muted);
   }
-
-  .badge-status {
-    font-size: 0.78rem;
-    font-weight: 800;
-    padding: 4px 12px;
-    border-radius: 999px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  .badge-dibayar { background: #dcfce7; color: #15803d; }
-  .badge-menunggu { background: #fef3c7; color: #b45309; }
-  .badge-diproses { background: #e0f2fe; color: #0369a1; }
-  .badge-dikirim { background: #f3e8ff; color: #7e22ce; }
-  .badge-selesai { background: #ecfdf5; color: #047857; }
-  .badge-dibatalkan { background: #fee2e2; color: #b91c1c; }
 
   .order-items-preview {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 14px;
+    gap: 12px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
   }
 
   .order-item-chip {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    gap: 10px;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 8px;
     padding: 6px 12px;
-    font-size: 0.85rem;
-    color: #334155;
+    font-size: 12px;
+    color: var(--ink);
   }
 
   .order-item-thumb {
@@ -106,7 +75,7 @@
     height: 32px;
     border-radius: 6px;
     object-fit: cover;
-    background: #fef3c7;
+    background: var(--paper-2);
   }
 
   .order-card-footer {
@@ -114,33 +83,36 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 14px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--line);
     flex-wrap: wrap;
     gap: 12px;
   }
 
   .order-total-label {
-    font-size: 0.8rem;
-    color: #64748b;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .05em;
+    text-transform: uppercase;
     margin-bottom: 2px;
   }
 
   .order-total-price {
-    font-size: 1.15rem;
-    font-weight: 900;
-    color: #0f172a;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
   }
 
   .empty-state {
     text-align: center;
-    background: #fff;
-    border-radius: 20px;
+    background: var(--cream);
+    border-radius: var(--radius);
     padding: 60px 24px;
-    border: 1px dashed #fed7aa;
+    border: 1px solid var(--line);
   }
 
   .empty-icon {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 12px;
   }
 </style>
@@ -148,13 +120,14 @@
 
 {% block content %}
 <div class="history-container">
-  <div class="history-header">
+  <div class="page-header">
     <div>
-      <h1>📦 Riwayat Pesanan Saya</h1>
-      <p style="color:#64748b; margin:4px 0 0; font-size:0.9rem;">Pantau status pemesanan roti dan bukti pembayaran Anda.</p>
+      <span class="eyebrow" style="margin-bottom:6px;">Your Bakery Moments</span>
+      <h1>{{ heading }}</h1>
+      <p>Pantau perjalanan setiap pesanan roti Anda dari oven sampai ke meja makan.</p>
     </div>
-    <a href="{% url 'katalog' %}" class="btn-primary" style="background:#c2410c; font-size:0.88rem;">
-      🛒 Belanja Roti Lagi
+    <a href="{% url 'katalog' %}" class="btn btn-primary" style="font-size:10px;">
+      Belanja Roti Lagi <span>↗</span>
     </a>
   </div>
 
@@ -165,22 +138,22 @@
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
           <span class="order-number">{{ pesanan.nomor_pesanan }}</span>
           <span class="order-date">🕒 {{ pesanan.waktu_pesan|date:"d M Y, H:i" }} WIB</span>
-          <span style="font-size:0.82rem; color:#64748b;">· {{ pesanan.get_metode_pembayaran_display }}</span>
+          <span style="font-size:11px; color:var(--muted);">· {{ pesanan.get_metode_pembayaran_display }}</span>
         </div>
 
         <div>
           {% if pesanan.status == 'dibayar' %}
-            <span class="badge-status badge-dibayar">✅ Lunas / Settlement</span>
+            <span class="status-pill success">✅ Lunas (Settlement)</span>
           {% elif pesanan.status == 'menunggu_pembayaran' %}
-            <span class="badge-status badge-menunggu">⏳ Menunggu Pembayaran</span>
+            <span class="status-pill pending">⏳ Menunggu Pembayaran</span>
           {% elif pesanan.status == 'diproses' %}
-            <span class="badge-status badge-diproses">👩‍🍳 Diproses Oven</span>
+            <span class="status-pill pending">👩‍🍳 Diproses Oven</span>
           {% elif pesanan.status == 'dikirim' %}
-            <span class="badge-status badge-dikirim">🚚 Sedang Dikirim</span>
+            <span class="status-pill success">🚚 Sedang Dikirim</span>
           {% elif pesanan.status == 'selesai' %}
-            <span class="badge-status badge-selesai">🎉 Selesai</span>
+            <span class="status-pill success">🎉 Selesai</span>
           {% else %}
-            <span class="badge-status badge-dibatalkan">❌ {{ pesanan.get_status_display }}</span>
+            <span class="status-pill danger">❌ {{ pesanan.get_status_display }}</span>
           {% endif %}
         </div>
       </div>
@@ -192,13 +165,13 @@
           {% if item.produk and item.produk.foto %}
             <img src="{{ item.produk.foto.url }}" alt="{{ item.nama_produk }}" class="order-item-thumb">
           {% else %}
-            <div class="order-item-thumb" style="display:flex;align-items:center;justify-content:center;font-size:1rem;">🍞</div>
+            <div class="order-item-thumb" style="display:grid; place-items:center; font-size:1rem;">🍞</div>
           {% endif %}
           <span><strong>{{ item.nama_produk }}</strong> × {{ item.jumlah }}</span>
         </div>
         {% endfor %}
         {% if pesanan.items.count > 4 %}
-        <span style="font-size:0.82rem; color:#64748b;">+{{ pesanan.items.count|add:"-4" }} item lainnya</span>
+        <span style="font-size:11px; color:var(--muted);">+{{ pesanan.items.count|add:"-4" }} item lainnya</span>
         {% endif %}
       </div>
 
@@ -210,12 +183,12 @@
 
         <div style="display:flex; gap:10px;">
           {% if pesanan.status == 'menunggu_pembayaran' %}
-          <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn-primary" style="background:#d97706; font-size:0.84rem; padding:7px 14px;">
-            ⚡ Bayar Sandbox →
+          <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn btn-primary" style="background:var(--terra); border-color:var(--terra); padding:8px 14px; font-size:9px;">
+            Bayar Sandbox →
           </a>
           {% endif %}
-          <a href="{% url 'order_invoice' pesanan.id %}" class="btn-secondary" style="font-size:0.84rem; padding:7px 14px;">
-            🧾 Lihat Invoice
+          <a href="{% url 'order_invoice' pesanan.id %}" class="btn-secondary" style="padding:8px 14px; font-size:9px;">
+            Lihat Invoice
           </a>
         </div>
       </div>
@@ -225,15 +198,14 @@
   {% else %}
     <div class="empty-state">
       <div class="empty-icon">🥐</div>
-      <h3 style="font-size:1.2rem; font-weight:800; color:#1e293b; margin:0 0 6px;">Belum Ada Riwayat Pesanan</h3>
-      <p style="color:#64748b; font-size:0.9rem; max-width:400px; margin:0 auto 20px;">
-        Anda belum pernah melakukan pemesanan roti di Lesaffrone Bakery. Yuk pilih varian roti lezat favorit Anda sekarang!
+      <h3 style="font-family:var(--serif); font-size:22px; font-weight:600; color:var(--ink); margin:0 0 8px;">Belum Ada Riwayat Pesanan</h3>
+      <p class="body-copy" style="max-width:420px; margin:0 auto 24px;">
+        Anda belum pernah melakukan pemesanan roti di Lesaffrone Bakery. Yuk pilih varian roti artisan favorit Anda sekarang!
       </p>
-      <a href="{% url 'katalog' %}" class="btn-primary" style="background:linear-gradient(135deg, #c2410c, #ea580c); padding:10px 22px;">
-        🛒 Mulai Belanja Sekarang
+      <a href="{% url 'katalog' %}" class="btn btn-primary">
+        Mulai Belanja <span>↗</span>
       </a>
     </div>
   {% endif %}
 </div>
 {% endblock %}
-

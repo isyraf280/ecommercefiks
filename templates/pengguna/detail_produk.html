@@ -6,220 +6,302 @@
   .detail-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 40px;
     align-items: start;
   }
-  @media (max-width: 680px) {
+  @media (max-width: 768px) {
     .detail-wrap { grid-template-columns: 1fr; }
   }
 
   .produk-foto-wrap {
-    border-radius: 16px;
+    border-radius: 48% 48% 16px 16px;
     overflow: hidden;
-    border: 1px solid #e2e8f0;
-    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border: 1px solid var(--line);
+    background: var(--paper-2);
     aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 16px 36px rgba(62, 43, 30, 0.08);
   }
   .produk-foto-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .produk-foto-placeholder { font-size: 6rem; }
 
-  .produk-info {}
   .produk-kat-badge {
     display: inline-block;
-    background: var(--primary-light);
-    color: var(--primary);
+    background: var(--paper);
+    color: var(--terra);
+    border: 1px solid var(--line);
     padding: 4px 12px;
     border-radius: 999px;
-    font-size: 0.8rem;
+    font-size: 10px;
     font-weight: 700;
-    margin-bottom: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
     text-decoration: none;
   }
   .produk-nama {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.25;
-    margin-bottom: 8px;
+    font-family: var(--serif);
+    font-size: clamp(26px, 3.2vw, 36px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 10px;
   }
   .produk-harga {
     font-size: 2rem;
-    font-weight: 900;
-    color: #059669;
+    font-weight: 700;
+    color: var(--terra-dark);
     margin-bottom: 4px;
   }
   .produk-satuan {
-    color: #64748b;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 24px;
   }
 
   .info-row {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
   .info-chip {
-    background: #f1f5f9;
-    border-radius: 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
     padding: 8px 14px;
-    font-size: 0.84rem;
-    color: #334155;
+    font-size: 12px;
+    color: var(--ink);
     font-weight: 600;
   }
-  .info-chip span { color: #64748b; font-weight: 400; display: block; font-size: 0.75rem; margin-bottom: 1px; }
+  .info-chip span {
+    color: var(--muted);
+    font-weight: 500;
+    display: block;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
 
   .stok-badge {
     display: inline-block;
-    padding: 5px 14px;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 0.82rem;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
-  .stok-available { background: #dcfce7; color: #15803d; }
-  .stok-low { background: #fef9c3; color: #854d0e; }
-  .stok-empty { background: #fee2e2; color: #991b1b; }
+  .stok-available { background: var(--sage-light); color: #657052; }
+  .stok-low { background: #fdf3e7; color: #a77b3c; }
+  .stok-empty { background: #fbf0ec; color: var(--terra); }
 
   .detail-section-title {
-    font-size: 0.95rem;
+    font-size: 10px;
     font-weight: 700;
-    color: #334155;
-    margin: 20px 0 8px;
-    padding-top: 16px;
-    border-top: 1px solid #e2e8f0;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 24px 0 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
   }
   .detail-section-title:first-of-type { border-top: none; padding-top: 0; }
-
   .deskripsi-text {
-    color: #475569;
-    font-size: 0.93rem;
-    line-height: 1.6;
-    white-space: pre-line;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
   }
 
-  /* Related */
-  .related-section { margin-top: 40px; }
+  /* Buy Action Box */
+  .buy-action-box {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-bottom: 24px;
+  }
+
+  .qty-selector {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  .qty-btn {
+    border: none;
+    background: transparent;
+    width: 36px;
+    height: 36px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: 0.15s;
+  }
+  .qty-btn:hover { background: var(--line); }
+  .qty-input {
+    width: 48px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+
+  /* Related Products */
+  .related-section {
+    margin-top: 48px;
+  }
   .related-section h2 {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 16px;
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 20px;
   }
   .related-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
   }
   .related-card {
-    background: #fff;
-    border: 1px solid #e2e8f0;
+    background: var(--cream);
+    border: 1px solid var(--line);
     border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
   }
-  .related-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
-  .related-card-img { width:100%; height:120px; object-fit:cover; background:#f1f5f9; }
-  .related-card-ph { width:100%; height:120px; background:linear-gradient(135deg,#fef3c7,#fde68a); display:flex;align-items:center;justify-content:center;font-size:2.5rem; }
-  .related-card-body { padding: 10px 12px; }
-  .related-card-nama { font-size: 0.88rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-  .related-card-harga { font-size: 0.88rem; font-weight: 800; color: #059669; }
+  .related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(62, 43, 30, 0.08);
+  }
+  .related-card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  .related-card-body {
+    padding: 14px;
+  }
+  .related-card-nama {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .related-card-harga {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--terra-dark);
+  }
 
   .btn-back-katalog {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 9px 18px;
-    background: #f1f5f9;
-    color: #334155;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    padding: 8px 16px;
+    background: var(--cream);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
     text-decoration: none;
     transition: 0.2s;
-    margin-bottom: 20px;
   }
-  .btn-back-katalog:hover { background: #e2e8f0; }
+  .btn-back-katalog:hover {
+    border-color: var(--terra);
+    color: var(--terra);
+  }
 </style>
 {% endblock %}
 
 {% block content %}
-<div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;">
-  <a href="{% url 'home' %}#katalog" class="btn-back-katalog">← Kembali ke Beranda Toko</a>
-  <a href="{% url 'app:katalog_pengguna' %}" class="btn-back-katalog">🛒 Katalog Lengkap</a>
+<div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+  <a href="{% url 'home' %}#katalog" class="btn-back-katalog">← Beranda Toko</a>
+  <a href="{% url 'katalog' %}" class="btn-back-katalog">Katalog Roti</a>
 </div>
 
 <div class="content-card">
   <div class="detail-wrap">
-    <!-- Foto -->
+    <!-- Foto Roti -->
     <div class="produk-foto-wrap">
       {% if produk.foto %}
         <img src="{{ produk.foto.url }}" alt="{{ produk.nama_produk }}">
       {% else %}
-        <div class="produk-foto-placeholder">🍞</div>
+        <div style="font-size:5rem;">🍞</div>
       {% endif %}
     </div>
 
-    <!-- Info -->
+    <!-- Informasi Produk -->
     <div class="produk-info">
       {% if produk.kategori %}
-      <a href="{% url 'app:katalog_pengguna' %}?kategori={{ produk.kategori.slug }}" class="produk-kat-badge">{{ produk.kategori.nama }}</a>
+      <a href="{% url 'katalog' %}?kategori={{ produk.kategori.slug }}" class="produk-kat-badge">{{ produk.kategori.nama }}</a>
       {% endif %}
       {% if produk.unggulan %}
-      <span style="display:inline-block;background:#fef9c3;color:#854d0e;padding:4px 10px;border-radius:999px;font-size:0.78rem;font-weight:700;margin-left:6px;margin-bottom:10px;">⭐ Produk Unggulan</span>
+      <span style="display:inline-block; background:var(--gold); color:#fff; padding:4px 10px; border-radius:999px; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-left:6px;">Bestseller</span>
       {% endif %}
 
-      <div class="produk-nama">{{ produk.nama_produk }}</div>
+      <h1 class="produk-nama">{{ produk.nama_produk }}</h1>
       <div class="produk-harga">Rp {{ produk.harga|floatformat:0 }}</div>
       <div class="produk-satuan">per {{ produk.satuan }}{% if produk.berat_gram %} · {{ produk.berat_gram }} gram{% endif %}</div>
 
-      <!-- Stok -->
+      <!-- Status Stok -->
       {% if produk.stok == 0 %}
-        <span class="stok-badge stok-empty">❌ Stok Habis</span>
+        <span class="stok-badge stok-empty">Sold Out</span>
       {% elif produk.stok <= 5 %}
-        <span class="stok-badge stok-low">⚠️ Stok Terbatas: {{ produk.stok }} {{ produk.satuan }}</span>
+        <span class="stok-badge stok-low">Limited Stock: {{ produk.stok }} {{ produk.satuan }}</span>
       {% else %}
-        <span class="stok-badge stok-available">✅ Tersedia: {{ produk.stok }} {{ produk.satuan }}</span>
+        <span class="stok-badge stok-available">Available in Oven: {{ produk.stok }} {{ produk.satuan }}</span>
       {% endif %}
 
       <!-- Tombol Aksi Belanja / Pembayaran -->
       {% if produk.stok > 0 %}
-      <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:14px; padding:18px 20px; margin-bottom:20px;">
-        <form method="POST" action="{% url 'tambah_keranjang' produk.slug %}" id="form-beli" style="display:flex; flex-direction:column; gap:12px;">
+      <div class="buy-action-box">
+        <form method="POST" action="{% url 'tambah_keranjang' produk.slug %}" id="form-beli" style="display:flex; flex-direction:column; gap:16px;">
           {% csrf_token %}
-          <div style="display:flex; align-items:center; gap:12px;">
-            <label for="jumlah-input" style="font-weight:700; font-size:0.88rem; color:#431407;">Jumlah Pesan:</label>
-            <div style="display:inline-flex; align-items:center; border:1px solid #fdba74; border-radius:8px; background:#fff; overflow:hidden;">
-              <button type="button" onclick="let input=document.getElementById('jumlah-input'); if(parseInt(input.value)>1) input.value=parseInt(input.value)-1;" style="border:none; background:#ffedd5; width:34px; height:34px; font-weight:800; color:#c2410c; cursor:pointer;">-</button>
-              <input type="number" id="jumlah-input" name="jumlah" value="1" min="1" max="{{ produk.stok }}" style="width:50px; text-align:center; border:none; font-weight:800; font-size:0.95rem; color:#0f172a;" />
-              <button type="button" onclick="let input=document.getElementById('jumlah-input'); if(parseInt(input.value)<{{ produk.stok }}) input.value=parseInt(input.value)+1;" style="border:none; background:#ffedd5; width:34px; height:34px; font-weight:800; color:#c2410c; cursor:pointer;">+</button>
+          <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+            <label for="jumlah-input" style="font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);">Jumlah Pesan:</label>
+            <div class="qty-selector">
+              <button type="button" class="qty-btn" onclick="let input=document.getElementById('jumlah-input'); if(parseInt(input.value)>1) input.value=parseInt(input.value)-1;">−</button>
+              <input type="number" id="jumlah-input" name="jumlah" value="1" min="1" max="{{ produk.stok }}" class="qty-input" />
+              <button type="button" class="qty-btn" onclick="let input=document.getElementById('jumlah-input'); if(parseInt(input.value)<{{ produk.stok }}) input.value=parseInt(input.value)+1;">＋</button>
             </div>
-            <span style="font-size:0.82rem; color:#9a3412;">{{ produk.satuan }}</span>
+            <span style="font-size:12px; color:var(--muted);">{{ produk.satuan }}</span>
           </div>
 
-          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;">
-            <button type="submit" class="btn-primary" style="background:#ea580c; border:none; padding:10px 18px; font-weight:700; font-size:0.9rem; border-radius:8px; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
-              🛒 Tambah ke Keranjang
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:4px;">
+            <button type="submit" class="btn btn-primary">
+              Add to Basket
             </button>
-            <a href="{% url 'beli_sekarang' produk.slug %}" class="btn-primary" style="background:#15803d; border:none; padding:10px 18px; font-weight:700; font-size:0.9rem; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-              ⚡ Beli Sekarang
+            <a href="{% url 'beli_sekarang' produk.slug %}" class="btn btn-outline" style="border-color:var(--terra); color:var(--terra);">
+              Buy Now <span>↗</span>
             </a>
           </div>
         </form>
       </div>
       {% else %}
-      <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:14px 18px; color:#991b1b; font-size:0.9rem; font-weight:600; margin-bottom:20px;">
-        ❌ Maaf, stok roti ini sedang habis dipesan. Silakan pilih varian roti lezat lainnya.
+      <div style="background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:16px; color:var(--terra); font-size:13px; margin-bottom:24px;">
+        Maaf, stok varian roti ini sedang habis dipesan untuk hari ini.
       </div>
       {% endif %}
 
@@ -232,25 +314,25 @@
         </div>
         {% if produk.berat_gram %}
         <div class="info-chip">
-          <span>Berat</span>{{ produk.berat_gram }} gram
+          <span>Berat Bersih</span>{{ produk.berat_gram }} gram
         </div>
         {% endif %}
         <div class="info-chip">
-          <span>Stok</span>{{ produk.stok }} {{ produk.satuan }}
+          <span>Sisa Stok</span>{{ produk.stok }} {{ produk.satuan }}
         </div>
       </div>
 
       {% if produk.deskripsi %}
-      <div class="detail-section-title">📋 Deskripsi Produk</div>
+      <div class="detail-section-title">Deskripsi Roti</div>
       <p class="deskripsi-text">{{ produk.deskripsi }}</p>
       {% endif %}
 
       {% if produk.bahan %}
-      <div class="detail-section-title">🌾 Bahan / Komposisi</div>
+      <div class="detail-section-title">Bahan &amp; Komposisi Alami</div>
       <p class="deskripsi-text">{{ produk.bahan }}</p>
       {% endif %}
 
-      <div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;font-size:0.8rem;color:#94a3b8;">
+      <div style="margin-top:24px; padding-top:16px; border-top:1px solid var(--line); font-size:11px; color:var(--muted);">
         Terakhir diperbarui: {{ produk.diperbarui|date:"d M Y, H:i" }} WIB
       </div>
     </div>
@@ -260,14 +342,14 @@
 <!-- Produk Terkait -->
 {% if produk_terkait %}
 <div class="related-section">
-  <h2>🧁 Produk Lainnya dari Kategori Ini</h2>
+  <h2>You might also savour</h2>
   <div class="related-grid">
     {% for p in produk_terkait %}
-    <a href="{% url 'app:detail_produk' p.slug %}" class="related-card">
+    <a href="{% url 'detail_produk' p.slug %}" class="related-card">
       {% if p.foto %}
-        <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}" class="related-card-img">
+        <img src="{{ p.foto.url }}" alt="{{ p.nama_produk }}" class="related-card-img" />
       {% else %}
-        <div class="related-card-ph">🍞</div>
+        <div style="height:150px; display:grid; place-items:center; font-size:2.5rem; background:var(--paper);">🍞</div>
       {% endif %}
       <div class="related-card-body">
         <div class="related-card-nama">{{ p.nama_produk }}</div>
@@ -279,4 +361,3 @@
 </div>
 {% endif %}
 {% endblock %}
-

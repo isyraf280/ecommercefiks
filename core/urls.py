@@ -15,6 +15,10 @@ urlpatterns += [
     path('', views_katalog.landing_page, name='home'),
     path('katalog/', views_katalog.katalog_pengguna, name='katalog'),
     path('katalog/<slug:slug>/', views_katalog.detail_produk, name='detail_produk'),
+    path('about/', views_katalog.about_page, name='about'),
+    path('story/', views_katalog.about_page, name='story'),
+    path('journal/', views_katalog.journal_page, name='journal'),
+    path('contact/', views_katalog.contact_page, name='contact'),
     path('seed-katalog/', views_katalog.seed_katalog_view, name='seed_katalog'),
 
     # ── KERANJANG & CHECKOUT ──

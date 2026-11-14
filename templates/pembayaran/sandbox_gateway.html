@@ -8,16 +8,16 @@
     margin: 0 auto;
   }
   .sandbox-card {
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 18px;
-    box-shadow: 0 20px 35px -5px rgba(0,0,0,0.08);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     overflow: hidden;
   }
   .sandbox-topbar {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    color: #ffffff;
-    padding: 20px 26px;
+    background: var(--ink);
+    color: #f7efe4;
+    padding: 22px 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,41 +25,42 @@
     gap: 12px;
   }
   .sandbox-badge-mode {
-    background: #f59e0b;
-    color: #78350f;
-    font-size: 0.72rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 9px;
     font-weight: 800;
     padding: 4px 10px;
     border-radius: 999px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
   .sandbox-amount {
-    font-size: 1.55rem;
-    font-weight: 900;
-    color: #38bdf8;
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #f7efe4;
   }
 
   .sandbox-body {
-    padding: 28px;
+    padding: 30px;
   }
 
   /* QRIS Box */
   .qris-box {
     text-align: center;
-    background: #f8fafc;
-    border: 2px dashed #cbd5e1;
+    background: var(--paper);
+    border: 1px dashed var(--line);
     border-radius: 16px;
     padding: 24px;
-    margin: 18px 0;
+    margin: 20px 0;
   }
   .qris-qr-frame {
     display: inline-block;
     background: #ffffff;
     padding: 16px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border: 1px solid var(--line);
   }
   .qris-qr-svg {
     width: 190px;
@@ -68,18 +69,18 @@
 
   /* VA Box */
   .va-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 14px;
     padding: 20px;
-    margin: 18px 0;
+    margin: 20px 0;
   }
   .va-number-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #ffffff;
-    border: 2px solid #fed7aa;
+    border: 1px solid var(--line);
     border-radius: 10px;
     padding: 12px 18px;
     margin: 10px 0;
@@ -88,197 +89,207 @@
     font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: 0.1em;
-    color: #c2410c;
+    color: var(--terra-dark);
     font-family: monospace;
   }
   .btn-copy-va {
-    background: #fff7ed;
-    color: #c2410c;
-    border: 1px solid #fed7aa;
+    background: var(--cream);
+    color: var(--ink);
+    border: 1px solid var(--line);
     padding: 6px 14px;
-    border-radius: 6px;
+    border-radius: 999px;
+    font-size: 10px;
     font-weight: 700;
-    font-size: 0.82rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
     cursor: pointer;
+    transition: 0.2s;
   }
-  .btn-copy-va:hover { background: #fed7aa; }
+  .btn-copy-va:hover {
+    background: var(--ink);
+    color: white;
+  }
 
   /* Credit Card Mock */
   .cc-mock-card {
-    background: linear-gradient(135deg, #1e293b, #334155);
+    background: linear-gradient(135deg, #3d312a, #231914);
     color: #ffffff;
-    border-radius: 14px;
-    padding: 20px 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 20px rgba(15,23,42,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 18px 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
   }
   .cc-chip {
-    width: 42px;
+    width: 44px;
     height: 32px;
-    background: linear-gradient(135deg, #f59e0b, #d97706);
+    background: linear-gradient(135deg, #d4af37, #f3e5ab);
     border-radius: 6px;
-    margin-bottom: 18px;
+    margin: 16px 0;
   }
 
-  /* Sandbox Control Panel (Testing Buttons) */
+  /* Testing Panel */
   .testing-panel {
-    background: #fffbeb;
-    border: 2px solid #fde68a;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 14px;
     padding: 20px;
-    margin-top: 28px;
+    margin-top: 26px;
   }
   .testing-panel-title {
-    font-size: 0.92rem;
-    font-weight: 800;
-    color: #92400e;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--terra);
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
+
   .btn-sim-success {
-    background: #16a34a;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 800;
-    font-size: 0.95rem;
+    background: var(--sage);
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(22,163,74,0.3);
-    transition: 0.2s;
+    gap: 6px;
+    transition: .2s;
   }
-  .btn-sim-success:hover { background: #15803d; transform: translateY(-1px); }
+  .btn-sim-success:hover { background: #63664d; }
 
   .btn-sim-deny {
-    background: #fee2e2;
-    color: #b91c1c;
+    background: var(--terra);
+    color: #ffffff;
     padding: 10px 16px;
-    border-radius: 8px;
+    border-radius: 999px;
+    font-size: 10px;
     font-weight: 700;
-    font-size: 0.88rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid #fecaca;
-    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: .2s;
   }
-  .btn-sim-deny:hover { background: #fecaca; }
+  .btn-sim-deny:hover { background: var(--terra-dark); }
 
   .btn-sim-expire {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--ink);
+    color: #ffffff;
     padding: 10px 16px;
-    border-radius: 8px;
+    border-radius: 999px;
+    font-size: 10px;
     font-weight: 700;
-    font-size: 0.88rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid #cbd5e1;
-    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: .2s;
   }
-  .btn-sim-expire:hover { background: #e2e8f0; }
+  .btn-sim-expire:hover { background: #40322b; }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="sandbox-container">
-  <!-- Top Notification -->
-  <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-    <a href="{% url 'katalog' %}" style="font-size: 0.88rem; font-weight: 700; color: #64748b; text-decoration: none;">
-      ← Batalkan &amp; Kembali ke Toko
-    </a>
-    <span class="sandbox-badge-mode">🧪 Environment: Sandbox Mode</span>
+  
+  <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="{% url 'lihat_keranjang' %}" class="btn-secondary" style="font-size: 10px;">← Batalkan &amp; Kembali</a>
+    <span style="font-size: 11px; color: var(--muted);">Order ID: <strong>{{ pesanan.nomor_pesanan }}</strong></span>
   </div>
 
   <div class="sandbox-card">
     <!-- Topbar Gateway -->
     <div class="sandbox-topbar">
       <div>
-        <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Lesaffrone Payment Gateway</div>
-        <div style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">Invoice: {{ pesanan.nomor_pesanan }}</div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+          <span class="sandbox-badge-mode">Fintech Sandbox</span>
+          <span style="font-size: 11px; opacity: 0.8;">Lesaffrone Payment Simulation</span>
+        </div>
+        <div style="font-size: 11px; opacity: 0.7;">Total Tagihan Pembayaran:</div>
+        <div class="sandbox-amount">Rp {{ pesanan.grand_total|floatformat:0 }}</div>
       </div>
       <div style="text-align: right;">
-        <div style="font-size: 0.75rem; color: #94a3b8;">Total Tagihan</div>
-        <div class="sandbox-amount">Rp {{ pesanan.grand_total|floatformat:0 }}</div>
+        <div style="font-size: 10px; opacity: 0.7; letter-spacing:.08em; text-transform:uppercase;">Sisa Waktu Pembayaran</div>
+        <div id="countdown" style="font-size: 1.3rem; font-weight: 700; font-family: monospace; color: var(--gold);">23:59:45</div>
       </div>
     </div>
 
-    <!-- Body Channel Pembayaran -->
     <div class="sandbox-body">
       <!-- Info Ringkas Pesanan -->
-      <div style="display: flex; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid #f1f5f9; font-size: 0.88rem; color: #475569;">
-        <div>Penerima: <strong>{{ pesanan.nama_pelanggan }}</strong> ({{ pesanan.telepon }})</div>
-        <div>Metode: <strong>{{ pesanan.get_metode_pembayaran_display }}</strong></div>
+      <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:12px;">
+          <span style="color:var(--muted);">Nama Penerima:</span>
+          <strong>{{ pesanan.nama_pelanggan }}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px; font-size:12px;">
+          <span style="color:var(--muted);">Kanal Pembayaran:</span>
+          <strong>{{ pesanan.get_metode_pembayaran_display }}</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:12px;">
+          <span style="color:var(--muted);">ID Transaksi Gateway:</span>
+          <code style="font-size: 11px; background:#fff; padding:2px 6px; border-radius:4px; border:1px solid var(--line);">{{ gateway.transaction_id }}</code>
+        </div>
       </div>
 
-      <!-- 1. CHANNEL QRIS -->
+      <!-- 1. CHANNEL QRIS / GOPAY -->
       {% if pesanan.metode_pembayaran == 'qris' or pesanan.metode_pembayaran == 'gopay' %}
       <div class="qris-box">
-        <div style="font-size: 0.82rem; font-weight: 800; color: #1e293b; margin-bottom: 4px;">
-          QRIS - Quick Response Code Indonesian Standard
+        <div style="font-family:var(--serif); font-size: 16px; font-weight: 600; margin-bottom: 6px; color: var(--ink);">
+          Scan QRIS Sandbox Lesaffrone
         </div>
-        <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 14px;">
-          Buka aplikasi e-wallet (GoPay, OVO, ShopeePay, Dana, LinkAja) atau Mobile Banking BCA/Mandiri/BRI Anda lalu scan QR code ini:
+        <p class="body-copy" style="font-size: 12px; margin-bottom: 16px;">
+          Buka aplikasi e-wallet pilihan Anda (GoPay, OVO, ShopeePay, Dana, BCA Mobile) lalu pindai QR Code simulasi ini:
         </p>
 
         <div class="qris-qr-frame">
-          <!-- Dynamic SVG QR Code Simulation -->
-          <svg class="qris-qr-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <!-- Background putih -->
-            <rect width="100" height="100" fill="#ffffff"/>
-            <!-- 3 Finder Patterns -->
-            <rect x="5" y="5" width="28" height="28" fill="#0f172a" rx="4"/>
-            <rect x="9" y="9" width="20" height="20" fill="#ffffff" rx="2"/>
-            <rect x="13" y="13" width="12" height="12" fill="#0f172a" rx="1"/>
-
-            <rect x="67" y="5" width="28" height="28" fill="#0f172a" rx="4"/>
-            <rect x="71" y="9" width="20" height="20" fill="#ffffff" rx="2"/>
-            <rect x="75" y="13" width="12" height="12" fill="#0f172a" rx="1"/>
-
-            <rect x="5" y="67" width="28" height="28" fill="#0f172a" rx="4"/>
-            <rect x="9" y="71" width="20" height="20" fill="#ffffff" rx="2"/>
-            <rect x="13" y="75" width="12" height="12" fill="#0f172a" rx="1"/>
-
-            <!-- QR Data Blocks -->
-            <rect x="38" y="10" width="8" height="8" fill="#0f172a"/>
-            <rect x="52" y="10" width="6" height="6" fill="#0f172a"/>
-            <rect x="38" y="24" width="6" height="6" fill="#0f172a"/>
-            <rect x="50" y="22" width="10" height="8" fill="#0f172a"/>
-
-            <rect x="10" y="38" width="6" height="10" fill="#0f172a"/>
-            <rect x="22" y="44" width="8" height="6" fill="#0f172a"/>
-            <rect x="38" y="38" width="8" height="8" fill="#c2410c"/>
-            <rect x="52" y="38" width="8" height="8" fill="#0f172a"/>
-            <rect x="66" y="38" width="10" height="6" fill="#0f172a"/>
-            <rect x="82" y="42" width="8" height="8" fill="#0f172a"/>
-
-            <rect x="38" y="52" width="10" height="6" fill="#0f172a"/>
-            <rect x="54" y="52" width="6" height="10" fill="#c2410c"/>
-            <rect x="68" y="52" width="8" height="8" fill="#0f172a"/>
-            <rect x="82" y="54" width="6" height="8" fill="#0f172a"/>
-
-            <rect x="38" y="68" width="8" height="8" fill="#0f172a"/>
-            <rect x="52" y="66" width="6" height="8" fill="#0f172a"/>
-            <rect x="68" y="68" width="10" height="6" fill="#0f172a"/>
-            <rect x="44" y="80" width="8" height="8" fill="#0f172a"/>
-            <rect x="60" y="82" width="8" height="6" fill="#0f172a"/>
-            <rect x="76" y="80" width="12" height="8" fill="#0f172a"/>
-
-            <!-- Center Badge -->
-            <circle cx="50" cy="50" r="7" fill="#c2410c"/>
-            <text x="50" y="53" font-size="7" fill="#ffffff" font-weight="bold" text-anchor="middle">🍞</text>
+          <!-- QRIS SVG Mockup -->
+          <svg class="qris-qr-svg" viewBox="0 0 100 100">
+            <!-- Outer borders -->
+            <rect x="0" y="0" width="100" height="100" fill="white"/>
+            <!-- Top Left Finder Pattern -->
+            <rect x="8" y="8" width="24" height="24" fill="#2d211b"/>
+            <rect x="12" y="12" width="16" height="16" fill="white"/>
+            <rect x="16" y="16" width="8" height="8" fill="#bd6548"/>
+            <!-- Top Right Finder Pattern -->
+            <rect x="68" y="8" width="24" height="24" fill="#2d211b"/>
+            <rect x="72" y="12" width="16" height="16" fill="white"/>
+            <rect x="76" y="16" width="8" height="8" fill="#bd6548"/>
+            <!-- Bottom Left Finder Pattern -->
+            <rect x="8" y="68" width="24" height="24" fill="#2d211b"/>
+            <rect x="12" y="72" width="16" height="16" fill="white"/>
+            <rect x="16" y="76" width="8" height="8" fill="#bd6548"/>
+            <!-- Random Mock QR Blocks -->
+            <rect x="38" y="10" width="6" height="6" fill="#2d211b"/>
+            <rect x="48" y="14" width="8" height="6" fill="#2d211b"/>
+            <rect x="38" y="22" width="6" height="10" fill="#2d211b"/>
+            <rect x="10" y="38" width="10" height="6" fill="#2d211b"/>
+            <rect x="24" y="42" width="8" height="8" fill="#2d211b"/>
+            <rect x="38" y="38" width="24" height="24" fill="#bd6548" rx="4"/>
+            <text x="50" y="53" font-size="9" font-family="serif" font-weight="bold" fill="white" text-anchor="middle">L</text>
+            <rect x="68" y="38" width="8" height="12" fill="#2d211b"/>
+            <rect x="80" y="44" width="10" height="6" fill="#2d211b"/>
+            <rect x="38" y="68" width="12" height="6" fill="#2d211b"/>
+            <rect x="54" y="72" width="8" height="12" fill="#2d211b"/>
+            <rect x="68" y="68" width="6" height="16" fill="#2d211b"/>
+            <rect x="78" y="74" width="12" height="8" fill="#2d211b"/>
           </svg>
-
-          <div style="font-size: 0.72rem; color: #64748b; margin-top: 8px;">
-            NMID: <strong>ID1020261108001</strong> • LESAFFRONE BAKERY
-          </div>
         </div>
 
-        <div style="margin-top: 14px; font-size: 0.78rem; color: #64748b;">
-          ⏱️ Selesaikan pembayaran dalam: <strong id="countdown" style="color: #c2410c;">23:59:45</strong>
+        <div style="margin-top: 14px; font-size: 11px; color: var(--muted);">
+          NMID: <strong>ID1020261188990</strong> · Lesaffrone Merchant
         </div>
       </div>
       {% endif %}
@@ -286,21 +297,21 @@
       <!-- 2. CHANNEL VIRTUAL ACCOUNT -->
       {% if 'va_' in pesanan.metode_pembayaran %}
       <div class="va-box">
-        <div style="font-size: 0.85rem; font-weight: 700; color: #334155;">
-          Nomor Virtual Account {{ gateway.bank }}:
+        <div style="font-size: 10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color: var(--muted); margin-bottom: 4px;">
+          Nomor Virtual Account {{ gateway.bank|upper }} (Sandbox)
         </div>
-
+        
         <div class="va-number-row">
-          <span class="va-number-text" id="vaText">{{ gateway.va_number|default:"8801234567890123" }}</span>
-          <button type="button" class="btn-copy-va" onclick="copyVA()">📋 Salin</button>
+          <span class="va-number-text" id="vaText">{{ gateway.va_number }}</span>
+          <button type="button" class="btn-copy-va" onclick="copyVA()">Salin No. VA</button>
         </div>
 
-        <div style="font-size: 0.8rem; color: #64748b; line-height: 1.6; margin-top: 10px;">
-          <strong>Petunjuk Pembayaran Sandbox {{ gateway.bank }}:</strong>
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 10px;">
+          <strong>Petunjuk Pembayaran:</strong>
           <ol style="margin-left: 20px; margin-top: 6px;">
             <li>Buka Mobile Banking {{ gateway.bank }} atau ATM terdekat.</li>
             <li>Pilih menu <strong>Transfer &rarr; Virtual Account</strong>.</li>
-            <li>Masukkan nomor VA di atas dan konfirmasi nama tagihan <strong>Lesaffrone Bakery</strong>.</li>
+            <li>Masukkan nomor VA di atas dan konfirmasi tagihan <strong>Lesaffrone Bakery</strong>.</li>
             <li>Pada mode sandbox ini, Anda dapat langsung menekan tombol simulasi di bawah untuk verifikasi instan.</li>
           </ol>
         </div>
@@ -312,14 +323,14 @@
       <div>
         <div class="cc-mock-card">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:0.8rem; letter-spacing:0.1em;">SANDBOX TEST CARD</span>
+            <span style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:.8;">SANDBOX TEST CARD</span>
             <span style="font-size:1.1rem; font-weight:800;">VISA</span>
           </div>
           <div class="cc-chip"></div>
           <div style="font-size: 1.25rem; font-family: monospace; letter-spacing: 0.15em; margin-bottom: 12px;">
             4111 2222 3333 4444
           </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.78rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 10px; opacity:.85;">
             <span>HOLDER: {{ pesanan.nama_pelanggan|upper }}</span>
             <span>EXPIRES: 12/28</span>
           </div>
@@ -343,12 +354,12 @@
         <div class="testing-panel-title">
           <span>🧪</span> PANEL PENGUJIAN GATEWAY (SIMULATOR ACTIONS)
         </div>
-        <p style="font-size: 0.8rem; color: #92400e; margin-bottom: 16px;">
-          Sebagai developer/tester, Anda dapat menguji respons sistem secara langsung dengan menekan salah satu tombol simulasi berikut:
+        <p class="body-copy" style="font-size: 12px; margin-bottom: 16px;">
+          Sebagai penguji sistem, Anda dapat menguji respons sistem secara langsung dengan menekan salah satu tombol simulasi berikut:
         </p>
 
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-          <a href="{% url 'payment_simulate_action' pesanan.id 'success' %}" class="btn-sim-success" onclick="return confirm('Simulasikan pembayaran BERHASIL? Pesanan akan diubah menjadi Lunas.');">
+          <a href="{% url 'payment_simulate_action' pesanan.id 'success' %}" class="btn-sim-success" onclick="return confirm('Simulasikan pembayaran BERHASIL? Pesanan akan diubah menjadi Lunas & stok dipotong.');">
             ✅ Simulasikan Bayar Berhasil (Settlement)
           </a>
 
@@ -388,4 +399,3 @@
   }
 </script>
 {% endblock %}
-

@@ -344,3 +344,100 @@ def detail_produk(request, slug):
     }
     return render(request, 'pengguna/detail_produk.html', context)
 
+
+# ─── HALAMAN INFORMASI ARTISAN: ABOUT, JOURNAL, CONTACT ────────
+def about_page(request):
+    """Halaman About / Tentang Kami Lesaffrone Artisan Bakery"""
+    context = {
+        'title': 'About Us — Lesaffrone Artisan Bakery',
+        'heading': 'Our Story & Philosophy',
+    }
+    return render(request, 'frontend/about.html', context)
+
+
+def story_page(request):
+    """Alias untuk backwards-compatibility"""
+    return about_page(request)
+
+
+def journal_page(request):
+    """Halaman Journal / Catatan Dapur Lesaffrone"""
+    articles = [
+        {
+            'slug': 'why-best-croissant-takes-time',
+            'tag': 'Behind the Bake',
+            'read_time': '5 min read',
+            'title': 'Why the best croissant takes a little more time.',
+            'excerpt': 'Di balik ratusan lapisan renyah dan rongga honeycomb yang menawan, tersimpan proses laminasi 24 jam dengan butter berkualitas dan kesabaran para baker.',
+            'image': 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=850&q=85',
+            'date': '12 November 2026',
+            'author': 'Chef Pastry Ojan',
+        },
+        {
+            'slug': 'butter-flour-and-honest-ingredients',
+            'tag': 'Our Ingredients',
+            'read_time': '3 min read',
+            'title': 'A little note about butter, flour & everything in between.',
+            'excerpt': 'Kami tidak menggunakan pengembang instan atau pemutih tepung. Segala yang kami sajikan berawal dari bahan murni pilihan yang diproses secara etis.',
+            'image': 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=750&q=85',
+            'date': '08 November 2026',
+            'author': 'Lesaffrone Team',
+        },
+        {
+            'slug': 'make-room-for-slower-morning',
+            'tag': 'Slow Living',
+            'read_time': '4 min read',
+            'title': 'Make room for a slower, sweeter kind of morning.',
+            'excerpt': 'Secangkir seduhan kopi hangat, sepotong sourdough panggang dengan taburan garam laut. Ritual kecil yang mengubah pagi biasa jadi berkah istimewa.',
+            'image': 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=750&q=85',
+            'date': '03 November 2026',
+            'author': 'Sarah Miller',
+        },
+        {
+            'slug': 'sourdough-starter-care-guide',
+            'tag': 'Kitchen Guide',
+            'read_time': '6 min read',
+            'title': 'Merawat starter sourdough liar di iklim tropis Indonesia.',
+            'excerpt': 'Panduan praktis menjaga suhu ragi alami tetap aktif dan beraroma buah segar tanpa menjadi terlalu asam saat cuaca sedang panas.',
+            'image': 'https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=750&q=85',
+            'date': '28 Oktober 2026',
+            'author': 'Master Baker Anto',
+        },
+        {
+            'slug': 'pairing-pastries-with-coffee',
+            'tag': 'Morning Rituals',
+            'read_time': '4 min read',
+            'title': 'Seni memasangkan pastry renyah dengan karakter kopi nusantara.',
+            'excerpt': 'Dari Toraja yang berkarakter rempah hingga Gayo yang fruity, temukan padanan pastry yang membuat selera Anda menari gembira.',
+            'image': 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=750&q=85',
+            'date': '20 Oktober 2026',
+            'author': 'Barista Team',
+        },
+        {
+            'slug': 'behind-the-scenes-night-bakers',
+            'tag': 'Artisan Life',
+            'read_time': '7 min read',
+            'title': 'Malam sunyi para peracik roti: jam 03.00 di dapur Lesaffrone.',
+            'excerpt': 'Saat seisi kota terlelap dalam mimpi, oven kami mulai menyala. Inilah cerita tentang dedikasi menghasilkan roti yang masih hangat di pagi Anda.',
+            'image': 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=750&q=85',
+            'date': '15 Oktober 2026',
+            'author': 'Lesaffrone Team',
+        },
+    ]
+    context = {
+        'title': 'The Little Journal — Lesaffrone Artisan Bakery',
+        'heading': 'Notes from our Kitchen',
+        'articles': articles,
+    }
+    return render(request, 'frontend/journal.html', context)
+
+
+def contact_page(request):
+    """Halaman Contact / Kontak Lesaffrone"""
+    context = {
+        'title': 'Contact Us — Lesaffrone Artisan Bakery',
+        'heading': 'Say Hello, Buttercup',
+    }
+    return render(request, 'frontend/contact.html', context)
+
+

@@ -9,11 +9,11 @@
   }
 
   .invoice-card {
-    background: #ffffff;
-    border-radius: 20px;
-    border: 1px solid #fed7aa;
-    box-shadow: 0 10px 30px rgba(194, 65, 12, 0.08);
-    padding: 36px 40px;
+    background: var(--cream);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 40px;
     position: relative;
     overflow: hidden;
   }
@@ -24,8 +24,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, #c2410c, #f59e0b, #10b981);
+    height: 4px;
+    background: linear-gradient(90deg, var(--terra), var(--gold), var(--sage));
   }
 
   .invoice-header {
@@ -33,7 +33,7 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-    border-bottom: 2px dashed #f1f5f9;
+    border-bottom: 1px dashed var(--line);
     padding-bottom: 24px;
     margin-bottom: 28px;
     flex-wrap: wrap;
@@ -46,31 +46,34 @@
   }
 
   .invoice-brand-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #c2410c, #f59e0b);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    box-shadow: 0 4px 12px rgba(194, 65, 12, 0.25);
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--terra);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--terra);
+    font-family: var(--serif);
+    font-size: 24px;
+    font-style: italic;
+    background: var(--paper);
   }
 
   .invoice-brand-title {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #1e293b;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
     line-height: 1.1;
-    letter-spacing: -0.02em;
   }
 
   .invoice-brand-subtitle {
-    font-size: 0.78rem;
-    color: #c2410c;
+    font-size: 8px;
+    color: var(--muted);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: .2em;
+    margin-top: 2px;
   }
 
   .invoice-meta {
@@ -83,28 +86,30 @@
   }
 
   .invoice-meta h2 {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #0f172a;
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
     margin: 0 0 4px;
   }
 
   .invoice-number {
-    font-family: 'Courier New', monospace;
-    font-size: 1rem;
+    font-family: monospace;
+    font-size: 13px;
     font-weight: 700;
-    color: #c2410c;
-    background: #fff7ed;
+    color: var(--terra-dark);
+    background: var(--paper);
     padding: 3px 10px;
     border-radius: 6px;
     display: inline-block;
+    border: 1px solid var(--line);
   }
 
   .invoice-status-banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 20px;
+    padding: 16px 20px;
     border-radius: 12px;
     margin-bottom: 28px;
     flex-wrap: wrap;
@@ -112,21 +117,21 @@
   }
 
   .status-settlement {
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    color: #065f46;
+    background: var(--sage-light);
+    border: 1px solid #cbd0be;
+    color: #4b5539;
   }
 
   .status-pending {
-    background: #fffbeb;
-    border: 1px solid #fde68a;
-    color: #92400e;
+    background: #fdf3e7;
+    border: 1px solid #f2dec0;
+    color: #925c1f;
   }
 
   .status-failed {
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #991b1b;
+    background: #fbf0ec;
+    border: 1px solid #f3d4cb;
+    color: var(--terra-dark);
   }
 
   .invoice-info-grid {
@@ -141,26 +146,26 @@
   }
 
   .info-box {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 12px;
-    padding: 16px 20px;
+    padding: 18px 20px;
   }
 
   .info-box h4 {
-    font-size: 0.8rem;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #64748b;
+    letter-spacing: .15em;
+    color: var(--muted);
     margin: 0 0 10px;
     font-weight: 700;
   }
 
   .info-box p {
     margin: 0 0 4px;
-    font-size: 0.9rem;
-    color: #1e293b;
-    line-height: 1.4;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
   }
 
   /* Table styling */
@@ -171,22 +176,22 @@
   }
 
   .items-table th {
-    background: #f8fafc;
+    background: var(--paper);
     padding: 12px 14px;
-    font-size: 0.8rem;
+    font-size: 10px;
     font-weight: 700;
-    color: #475569;
+    color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border-bottom: 2px solid #e2e8f0;
+    letter-spacing: .12em;
+    border-bottom: 1px solid var(--line);
     text-align: left;
   }
 
   .items-table td {
-    padding: 14px;
-    border-bottom: 1px solid #f1f5f9;
-    font-size: 0.9rem;
-    color: #334155;
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink);
     vertical-align: middle;
   }
 
@@ -201,8 +206,8 @@
     height: 48px;
     border-radius: 8px;
     object-fit: cover;
-    background: #fef3c7;
-    border: 1px solid #fed7aa;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
   }
 
   /* Totals section */
@@ -220,33 +225,35 @@
   .total-row {
     display: flex;
     justify-content: space-between;
-    padding: 6px 0;
-    font-size: 0.9rem;
-    color: #64748b;
+    padding: 8px 0;
+    font-size: 13px;
+    color: var(--muted);
   }
 
   .total-row.grand {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: #0f172a;
-    border-top: 2px solid #e2e8f0;
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    border-top: 1px solid var(--line);
     margin-top: 8px;
-    padding-top: 12px;
+    padding-top: 14px;
   }
 
   .total-row.grand span:last-child {
-    color: #c2410c;
+    color: var(--terra-dark);
   }
 
   /* Sandbox payment box */
   .sandbox-badge-box {
-    background: linear-gradient(135deg, #f8fafc, #eff6ff);
-    border: 1px dashed #93c5fd;
+    background: var(--paper);
+    border: 1px dashed var(--line);
     border-radius: 12px;
     padding: 16px 20px;
     margin-bottom: 28px;
-    font-size: 0.85rem;
-    color: #1e3a8a;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
   }
 
   .invoice-actions {
@@ -255,12 +262,12 @@
     justify-content: flex-end;
     flex-wrap: wrap;
     padding-top: 20px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--line);
   }
 
   @media print {
     body { background: white !important; }
-    .navbar, .invoice-actions, .btn-back-katalog, .alert-box { display: none !important; }
+    .navbar, .invoice-actions, .btn-secondary, .alert-box { display: none !important; }
     .invoice-card { box-shadow: none !important; border: 1px solid #ccc !important; padding: 0 !important; }
     .invoice-container { margin: 0 !important; max-width: 100% !important; }
   }
@@ -270,27 +277,27 @@
 {% block content %}
 <div class="invoice-container">
   
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
-    <a href="{% url 'katalog' %}" class="btn-secondary" style="font-size:0.85rem;">← Kembali ke Katalog</a>
-    <a href="{% url 'riwayat_pesanan' %}" class="btn-secondary" style="font-size:0.85rem;">📦 Lihat Semua Riwayat Pesanan</a>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+    <a href="{% url 'katalog' %}" class="btn-secondary" style="font-size:10px;">← Kembali ke Katalog</a>
+    <a href="{% url 'riwayat_pesanan' %}" class="btn-secondary" style="font-size:10px;">📦 Riwayat Pesanan</a>
   </div>
 
   <div class="invoice-card" id="printable-invoice">
     <!-- Header -->
     <div class="invoice-header">
       <div class="invoice-brand">
-        <div class="invoice-brand-logo">🍞</div>
+        <div class="invoice-brand-logo">L</div>
         <div>
-          <div class="invoice-brand-title">Lesaffrone Bakery</div>
+          <div class="invoice-brand-title">lesaffrone</div>
           <div class="invoice-brand-subtitle">Artisan Bakery &amp; Patisserie</div>
-          <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">Jl. Roti Harum No. 45 · Telp: (021) 8899-7711</div>
+          <div style="font-size:11px; color:var(--muted); margin-top:2px;">Jl. Roti Harum No. 45 · Telp: (021) 8899-7711</div>
         </div>
       </div>
 
       <div class="invoice-meta">
         <h2>INVOICE PEMBELIAN</h2>
         <div><span class="invoice-number">{{ pesanan.nomor_pesanan }}</span></div>
-        <div style="font-size:0.82rem; color:#64748b; margin-top:4px;">
+        <div style="font-size:11px; color:var(--muted); margin-top:6px;">
           Tanggal: <strong>{{ pesanan.waktu_pesan|date:"d F Y, H:i" }} WIB</strong>
         </div>
       </div>
@@ -299,53 +306,53 @@
     <!-- Status Banner -->
     {% if pesanan.status == 'dibayar' %}
     <div class="invoice-status-banner status-settlement">
-      <div style="display:flex; align-items:center; gap:10px;">
+      <div style="display:flex; align-items:center; gap:12px;">
         <span style="font-size:1.5rem;">✅</span>
         <div>
-          <strong style="font-size:1rem;">PEMBAYARAN LUNAS (SETTLEMENT)</strong>
-          <div style="font-size:0.82rem; opacity:0.9;">
+          <strong style="font-size:14px; display:block;">PEMBAYARAN LUNAS (SETTLEMENT)</strong>
+          <div style="font-size:11px; opacity:0.9;">
             Diverifikasi oleh Sandbox Payment Gateway pada {{ pesanan.waktu_bayar|date:"d M Y, H:i" }} WIB
           </div>
         </div>
       </div>
-      <span style="background:#059669; color:#fff; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px;">LUNAS</span>
+      <span class="status-pill success">LUNAS</span>
     </div>
     {% elif pesanan.status == 'menunggu_pembayaran' %}
     <div class="invoice-status-banner status-pending">
-      <div style="display:flex; align-items:center; gap:10px;">
+      <div style="display:flex; align-items:center; gap:12px;">
         <span style="font-size:1.5rem;">⏳</span>
         <div>
-          <strong style="font-size:1rem;">MENUNGGU PEMBAYARAN</strong>
-          <div style="font-size:0.82rem; opacity:0.9;">
+          <strong style="font-size:14px; display:block;">MENUNGGU PEMBAYARAN</strong>
+          <div style="font-size:11px; opacity:0.9;">
             Silakan selesaikan pembayaran simulator untuk memproses pesanan Anda.
           </div>
         </div>
       </div>
-      <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn-primary" style="background:#d97706; padding:6px 14px; font-size:0.82rem;">Bayar Sekarang (Sandbox) →</a>
+      <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn btn-primary" style="padding:6px 14px; font-size:9px;">Bayar Sekarang (Sandbox) →</a>
     </div>
     {% elif pesanan.status == 'dibatalkan' %}
     <div class="invoice-status-banner status-failed">
-      <div style="display:flex; align-items:center; gap:10px;">
+      <div style="display:flex; align-items:center; gap:12px;">
         <span style="font-size:1.5rem;">❌</span>
         <div>
-          <strong style="font-size:1rem;">TRANSAKSI DIBATALKAN / GAGAL</strong>
-          <div style="font-size:0.82rem; opacity:0.9;">
+          <strong style="font-size:14px; display:block;">TRANSAKSI DIBATALKAN / GAGAL</strong>
+          <div style="font-size:11px; opacity:0.9;">
             Status gateway: {{ gateway.status_message|default:"Transaksi dibatalkan atau ditolak." }}
           </div>
         </div>
       </div>
-      <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn-secondary" style="font-size:0.82rem;">Ulangi Pembayaran</a>
+      <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn-secondary" style="font-size:9px;">Ulangi Pembayaran</a>
     </div>
     {% else %}
     <div class="invoice-status-banner status-settlement">
-      <div style="display:flex; align-items:center; gap:10px;">
+      <div style="display:flex; align-items:center; gap:12px;">
         <span style="font-size:1.5rem;">📦</span>
         <div>
-          <strong style="font-size:1rem;">STATUS: {{ pesanan.get_status_display|upper }}</strong>
-          <div style="font-size:0.82rem; opacity:0.9;">Pesanan sedang dalam penanganan pihak Lesaffrone Bakery.</div>
+          <strong style="font-size:14px; display:block;">STATUS: {{ pesanan.get_status_display|upper }}</strong>
+          <div style="font-size:11px; opacity:0.9;">Pesanan sedang dalam proses penanganan oleh tim Lesaffrone Bakery.</div>
         </div>
       </div>
-      <span style="background:#2563eb; color:#fff; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px;">{{ pesanan.get_status_display }}</span>
+      <span class="status-pill success">{{ pesanan.get_status_display }}</span>
     </div>
     {% endif %}
 
@@ -356,9 +363,9 @@
         <p><strong>{{ pesanan.nama_pelanggan }}</strong></p>
         <p>📞 {{ pesanan.telepon }}</p>
         <p>✉️ {{ pesanan.email }}</p>
-        <p style="margin-top:6px; color:#475569;">📍 {{ pesanan.alamat_pengiriman }}</p>
+        <p style="margin-top:6px; color:var(--muted);">📍 {{ pesanan.alamat_pengiriman }}</p>
         {% if pesanan.catatan %}
-        <p style="margin-top:6px; font-size:0.82rem; color:#d97706;">📝 <em>Catatan: "{{ pesanan.catatan }}"</em></p>
+        <p style="margin-top:6px; font-size:11px; color:var(--terra);">📝 <em>Catatan: "{{ pesanan.catatan }}"</em></p>
         {% endif %}
       </div>
 
@@ -366,8 +373,8 @@
         <h4>Informasi Pembayaran</h4>
         <p>Metode: <strong>{{ pesanan.get_metode_pembayaran_display }}</strong></p>
         {% if gateway %}
-        <p>Gateway: <span style="font-weight:700; color:#2563eb;">Lesaffrone Sandbox Gateway</span></p>
-        <p>Transaksi ID: <code style="font-size:0.82rem; background:#e2e8f0; padding:2px 6px; border-radius:4px;">{{ gateway.transaction_id }}</code></p>
+        <p>Gateway: <strong>Lesaffrone Sandbox Gateway</strong></p>
+        <p>Transaksi ID: <code style="font-size:11px; background:#fff; padding:2px 6px; border-radius:4px; border:1px solid var(--line);">{{ gateway.transaction_id }}</code></p>
         {% if gateway.va_number %}
         <p>VA Number: <strong>{{ gateway.va_number }}</strong> ({{ gateway.bank|upper }})</p>
         {% endif %}
@@ -394,17 +401,17 @@
               {% if item.produk and item.produk.foto %}
                 <img src="{{ item.produk.foto.url }}" alt="{{ item.nama_produk }}" class="item-thumb">
               {% else %}
-                <div class="item-thumb" style="display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🍞</div>
+                <div class="item-thumb" style="display:grid; place-items:center; font-size:1.3rem;">🍞</div>
               {% endif %}
               <div>
-                <strong style="color:#0f172a; display:block;">{{ item.nama_produk }}</strong>
-                <span style="font-size:0.78rem; color:#64748b;">per {{ item.satuan }}</span>
+                <strong style="color:var(--ink); display:block; font-family:var(--serif); font-size:15px;">{{ item.nama_produk }}</strong>
+                <span style="font-size:11px; color:var(--muted);">per {{ item.satuan }}</span>
               </div>
             </div>
           </td>
           <td style="text-align:right;">Rp {{ item.harga_satuan|floatformat:0 }}</td>
           <td style="text-align:center; font-weight:700;">{{ item.jumlah }}</td>
-          <td style="text-align:right; font-weight:700; color:#0f172a;">Rp {{ item.subtotal|floatformat:0 }}</td>
+          <td style="text-align:right; font-weight:700; color:var(--ink);">Rp {{ item.subtotal|floatformat:0 }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -421,7 +428,7 @@
           <span>Biaya Pengiriman</span>
           <span>
             {% if pesanan.ongkir == 0 %}
-              <strong style="color:#059669;">GRATIS</strong>
+              <span class="status-pill success">GRATIS</span>
             {% else %}
               Rp {{ pesanan.ongkir|floatformat:0 }}
             {% endif %}
@@ -438,23 +445,23 @@
     <div class="sandbox-badge-box">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
         <span style="font-size:1.1rem;">🛡️</span>
-        <strong style="font-size:0.9rem;">Catatan Simulasi Payment Gateway:</strong>
+        <strong style="font-size:12px; color:var(--ink);">Catatan Simulasi Payment Gateway:</strong>
       </div>
       <div>Transaksi ini dijalankan pada lingkungan <strong>Fintech Sandbox Environment Lesaffrone</strong>. Tidak ada pemotongan saldo rekening nyata. Pengurangan stok produk telah diperbarui secara otomatis di sistem database.</div>
     </div>
 
     <!-- Action Buttons -->
     <div class="invoice-actions">
-      <button onclick="window.print()" class="btn-secondary" style="display:inline-flex; align-items:center; gap:6px;">
+      <button onclick="window.print()" class="btn-secondary" style="font-size:10px;">
         🖨️ Cetak / Unduh PDF
       </button>
       {% if pesanan.status == 'menunggu_pembayaran' %}
-      <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn-primary" style="background:#c2410c;">
+      <a href="{% url 'payment_sandbox' pesanan.id %}" class="btn btn-primary" style="background:var(--terra); border-color:var(--terra);">
         ⚡ Buka Simulator Pembayaran
       </a>
       {% endif %}
-      <a href="{% url 'katalog' %}" class="btn-primary" style="background:linear-gradient(135deg, #c2410c, #ea580c);">
-        🛍️ Belanja Lagi
+      <a href="{% url 'katalog' %}" class="btn btn-primary">
+        Belanja Lagi <span>↗</span>
       </a>
     </div>
 

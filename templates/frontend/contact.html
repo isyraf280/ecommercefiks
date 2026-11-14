@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="padding-top: 30px; padding-bottom: 70px;">
+  <section class="section contact" style="background: transparent; padding: 20px 0;">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Say hello, buttercup</span>
+        <h1 class="display" style="font-size: clamp(38px, 4vw, 56px); margin: 20px 0 24px;">Let's make<br/><em>something</em><br/>delightful.</h1>
+        <p class="body-copy" style="margin-bottom: 32px;">
+          Punya pertanyaan tentang roti kami, ingin memesan hampers untuk acara spesial, atau sekadar ingin menyapa? Kami selalu senang mendengarnya.
+        </p>
+        <div class="contact-details">
+          <div>
+            <i>⌖</i>
+            <span>
+              <b>Lokasi Bakery Kami</b>
+              Jl. Roti Hangat No. 08, Makassar, Indonesia
+            </span>
+          </div>
+          <div>
+            <i>▷</i>
+            <span>
+              <b>Jam Operasional Oven</b>
+              Setiap Hari · 06.00 – 21.00 WITA
+            </span>
+          </div>
+          <div>
+            <i>✉</i>
+            <span>
+              <b>Kontak & WhatsApp</b>
+              hello@lesaffrone.com · +62 812 3456 7890
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Terima kasih atas pesan Anda! Tim Lesaffrone akan segera menghubungi Anda.'); this.reset();" style="border-radius: var(--radius);">
+        <div class="field">
+          <label for="contactName">Nama Lengkap</label>
+          <input id="contactName" name="name" placeholder="Bagaimana kami memanggil Anda?" required />
+        </div>
+        <div class="field">
+          <label for="contactEmail">Alamat Email</label>
+          <input id="contactEmail" name="email" type="email" placeholder="nama@email.com" required />
+        </div>
+        <div class="field full">
+          <label for="contactTopic">Topik Pertanyaan</label>
+          <select id="contactTopic">
+            <option>Pertanyaan Umum & Menu</option>
+            <option>Pesanan Khusus / Hampers Acara</option>
+            <option>Kerja Sama & Katering</option>
+            <option>Umpan Balik & Masukan</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="contactMessage">Catatan atau Pesan Anda</label>
+          <textarea id="contactMessage" rows="4" placeholder="Tuliskan apa yang ada di pikiran Anda..." required></textarea>
+        </div>
+        <button class="btn" type="submit">Kirim Catatan <span>↗</span></button>
+      </form>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
